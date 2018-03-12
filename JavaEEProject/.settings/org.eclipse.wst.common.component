@@ -2,7 +2,7 @@
     <wb-module deploy-name="JavaEEProject">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="JavaEEProject"/>
         <property name="java-output-path" value="/JavaEEProject/build/classes"/>
+        <property name="context-root" value="app"/>
     </wb-module>
 </project-modules>
