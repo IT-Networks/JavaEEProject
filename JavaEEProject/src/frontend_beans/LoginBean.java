@@ -1,12 +1,15 @@
-package Beans;
+package frontend_beans;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.Size;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import frontend_controller.SessionUtils;
 
 @ManagedBean
 @RequestScoped
@@ -42,6 +45,8 @@ public class LoginBean {
     if ("BootsFaces".equalsIgnoreCase(username) && "rocks!".equalsIgnoreCase(password)) {
       FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Congratulations! You've successfully logged in.");
       FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
+      HttpSession session = SessionUtils.getSession();
+      session.setAttribute("username", username);
  
     } else {
       FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "That's the wrong password. Hint: BootsFaces rocks!");

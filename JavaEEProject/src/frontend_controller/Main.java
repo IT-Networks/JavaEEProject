@@ -1,4 +1,4 @@
-package Controller;
+package frontend_controller;
 
 public class Main {
 
