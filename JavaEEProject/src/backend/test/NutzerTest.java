@@ -1,16 +1,16 @@
 package backend.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import backend.enterpriseLogic.ErrorHandler;
 import backend.enterpriseLogic.NutzerHandler;
 
-class NutzerTest {
+public class NutzerTest {
 	private NutzerHandler myBean = new NutzerHandler();
 	@Test
-	void testCreateNutzer() {
+	public void testCreateNutzer() {
 		assertEquals(ErrorHandler.NUTZERSCHONVORHANDEN, myBean.createNutzer("Halil", "Özdogan", "halil", "start123", "Manager"));
 		assertEquals(ErrorHandler.NUTZERSCHONVORHANDEN, myBean.createNutzer("Dagobert", "Duck", "dagobert", "start123", "Mitarbeiter"));
 		assertEquals(ErrorHandler.NUTZERDATENUNVOLLSTAENDIG, myBean.createNutzer("", "Özdogan", "user", "start123", "Manager"));

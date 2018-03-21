@@ -9,12 +9,15 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import backend.enterpriseLogic.NutzerHandler;
+import backend.enterpriseLogic.RelationHandlerLocal;
 import frontend_controller.SessionUtils;
 
 @ManagedBean
 @RequestScoped
 public class RegisterBean {
-@Size(min=4, max=10)
+
+	@Size(min=4, max=10)
   @NotEmpty
   private String username;
  
@@ -70,5 +73,14 @@ public void setUsername(String name) {
 
 	public String getLastname() {
 		return lastname;
+	}
+	
+
+	public void register() {
+		NutzerHandler nh = new NutzerHandler();
+		nh.createNutzer(name, lastname, username, password, profilTyp);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+				"Congratulations! You've successfully logged in.");
+		FacesContext.getCurrentInstance().addMessage("registerForm:name", msg);
 	}
 }

@@ -83,11 +83,11 @@ body {
 					<b:column medium-screen="4">
 						<b:selectOneMenu required="true"
 							requiredMessage="Bitte den Profiltyp eintragen" update="@this"
-							value="#{registerBean.profilTyp}"
-							onchange="ajax:selectOneMenuBean.onChange()">
+							value="#{registerBean.profilTyp}">
 							<f:facet name="prepend">
 								<b:icon name="user" />
 							</f:facet>
+							<f:selectItem itemLabel="(Bitte auswählen)" />
 							<f:selectItem itemLabel="Manager" />
 							<f:selectItem itemLabel="Mitarbeiter" />
 						</b:selectOneMenu>
@@ -129,7 +129,7 @@ body {
 					</b:column>
 					<b:column span="2" offset="2">
 						<b:commandButton value="Registrieren"
-							onclick="ajax:loginBean.login()" update="@form" look="primary"
+							onclick="ajax:registerBean.register()" update="@form" look="primary"
 							style="width:100%" />
 					</b:column>
 				</b:row>
