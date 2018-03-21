@@ -15,7 +15,7 @@ class RelationTest {
 
 
 	@Test
-	void testRelationAnlegen() throws NamingException {
+	void testCreateRelation() throws NamingException {
 		assertEquals(ErrorHandler.RELATIONSCHONVORHANDEN, myBean.createRelation("FRA", "PAD"));
 		assertEquals(ErrorHandler.STARTORTNICHTGEFUNDEN, myBean.createRelation("+++", "PAD"));
 		assertEquals(ErrorHandler.ZIELORTNICHTGEFUNDEN, myBean.createRelation("FRA", "+++"));
