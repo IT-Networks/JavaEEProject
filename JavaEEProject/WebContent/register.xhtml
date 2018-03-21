@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Flüge buchen leicht gemacht</title>
+	<meta name="author" content="Riccardo Massera"></meta>
+	<style>
+body {
+	background-image: url("img/island.jpeg");
+	background-color: #cccccc;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#dropMenuExample {
+	
+}
+</style>
+	<b:navBar brand="Brand" brandHref="#" id="dropMenuExample"
+		contentDisabled="#{navBarBean.navBarDisabled}" position="top"
+		sticky="false" fixed="top">
+		<b:navbarLinks contentDisabled="#{navBarBean.navBarLinksDisabled}">
+			<b:navLink value="Home" href="index.xhtml"></b:navLink>
+			<b:navLink value="Aktuelle Flüge" href="currentFluege.xhtml"></b:navLink>
+			<b:navLink value="Login" href="login.xhtml"></b:navLink>
+			<b:dropMenu value="Flüge"
+				contentDisabled="#{navBarBean.dropMenuDisabled}">
+				<b:navLink value="Flug anlegen" href="#"></b:navLink>
+				<b:navLink value="Flughafen hinzufügen" href="#"></b:navLink>
+			</b:dropMenu>
+		</b:navbarLinks>
+	</b:navBar>
+</h:head>
+
+<h:body>
+
+	<h:form id="registerForm">
+		<b:container layout="fluid">
+			<b:panel title="Registrierung" look="primary">
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Username:" for="username" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:inputText placeholder="Username" id="username"
+							value="#{registerBean.username}" ajax="true" autocomplete="false"
+							update="@(.message)">
+							<f:facet name="prepend">
+								<b:icon name="user" />
+							</f:facet>
+						</b:inputText>
+					</b:column>
+					<b:column medium-screen="6" style-class="message">
+						<b:message for="username" />
+					</b:column>
+				</b:row>
+				<b:row tooltip="This password has fancy error messages.">
+					<b:column medium-screen="2">
+						<h:outputText value="Passwort:" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:inputSecret placeholder="Password" id="password"
+							value="#{registerBean.password}" ajax="true" autocomplete="false"
+							update="@(.message)">
+							<f:facet name="prepend">
+								<b:iconAwesome name="key" />
+							</f:facet>
+						</b:inputSecret>
+					</b:column>
+					<b:column medium-screen="6" styleClass="message">
+						<b:message for="password"/>
+					</b:column>
+				</b:row>
+				<b:row tooltip="Um welche Art von Profil handelt es sich">
+					<b:column medium-screen="2">
+						<h:outputText value="Profil Typ" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:selectOneMenu required="true"
+							requiredMessage="Bitte den Profiltyp eintragen" update="@this"
+							value="#{registerBean.profilTyp}"
+							onchange="ajax:selectOneMenuBean.onChange()">
+							<f:facet name="prepend">
+								<b:icon name="user" />
+							</f:facet>
+							<f:selectItem itemLabel="Manager" />
+							<f:selectItem itemLabel="Mitarbeiter" />
+						</b:selectOneMenu>
+					</b:column>
+					<b:column medium-screen="6" styleClass="message">
+						<b:message for="password" />
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Vorname:" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:inputText placeholder="Vorname" id="name"
+							value="#{registerBean.name}" ajax="true" autocomplete="false"
+							update="@(.message)">
+							<f:facet name="prepend">
+								<b:iconAwesome name="user" />
+							</f:facet>
+						</b:inputText>
+					</b:column>
+					<b:column medium-screen="6" style-class="message">
+						<b:message for="name" />
+					</b:column>
+					<b:column medium-screen="2">
+						<h:outputText value="Nachname:" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:inputText placeholder="Nachname" id="lastname"
+							value="#{registerBean.lastname}" ajax="true" autocomplete="false"
+							update="@(.message)">
+							<f:facet name="prepend">
+								<b:iconAwesome name="user" />
+							</f:facet>
+						</b:inputText>
+					</b:column>
+					<b:column medium-screen="6" style-class="message">
+						<b:message for="name" line-break-tag="/&gt;&lt;/p&gt;" />
+					</b:column>
+					<b:column span="2" offset="2">
+						<b:commandButton value="Registrieren"
+							onclick="ajax:loginBean.login()" update="@form" look="primary"
+							style="width:100%" />
+					</b:column>
+				</b:row>
+			</b:panel>
+		</b:container>
+	</h:form>
+</h:body>
+</html>

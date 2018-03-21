@@ -18,7 +18,7 @@ public class LoginBean {
   @NotEmpty
   private String username;
  
-  @Size(min=4, max=10)
+  @Size(min=4, max=20)
   @NotEmpty
   private String password;
  
