@@ -1,5 +1,12 @@
 package frontend_beans;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -76,11 +83,11 @@ public void setUsername(String name) {
 	}
 	
 
-	public void register() {
+	public void register() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		NutzerHandler nh = new NutzerHandler();
-		nh.createNutzer(name, lastname, username, password, profilTyp);
+		String output = nh.createNutzer(name, lastname, username, password, profilTyp);
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
-				"Congratulations! You've successfully logged in.");
+				output);
 		FacesContext.getCurrentInstance().addMessage("registerForm:name", msg);
 	}
 }
