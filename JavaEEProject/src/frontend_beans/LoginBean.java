@@ -49,7 +49,7 @@ public class LoginBean {
 		NutzerHandler nh = new NutzerHandler();
 		String result = nh.checkPasswort(username, password);
 		FacesMessage msg;
-		if (result.equals("Login erfolgreich")) {
+		if (result.equals("Login erfolgreich.")) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
 					result);
 			HttpSession session = SessionUtils.getSession();

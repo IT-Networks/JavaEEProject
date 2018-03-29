@@ -39,9 +39,7 @@ public class NutzerHandler {
 	public NutzerHandler() {
 		emf = Persistence.createEntityManagerFactory("JavaEEProject");
 
-
 	}
-
 
 	public String createNutzer(String vorname, String nachname, String anmeldename, String passwort, String nutzertyp)
 			throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
@@ -67,13 +65,12 @@ public class NutzerHandler {
 			nutzer.setPasswort(encryptPasswort(passwort));
 			if (nutzertyp.equals("Mitarbeiter") || nutzertyp.equals("Manager")) {
 				nutzer.setNutzertyp(nutzertyp);
-			}
-			else {
+			} else {
 				return ErrorHandler.NUTZERTYPNICHTVORHANDEN;
 			}
 			em.persist(nutzer);
 			em.getTransaction().commit();
-			
+
 			em.close();
 		} else {
 			return ErrorHandler.NUTZERDATENUNVOLLSTAENDIG;
@@ -98,8 +95,20 @@ public class NutzerHandler {
 		if (!passwort.equals(decryptPasswort(nutzer.get(0).getPasswort()))) {
 			return ErrorHandler.NUTZERPASSWORTFALSCH;
 		}
-
+		em.close();
 		return "Login erfolgreich.";
+	}
+	
+	public String getNutzertyp(String anmeldename) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query query = em.createNamedQuery("Nutzer.findByName").setParameter("name", anmeldename);
+		List<Nutzer> nutzerliste = new ArrayList<Nutzer>();
+		for (Object o : query.getResultList()) {
+			nutzerliste.add((Nutzer) o);
+		}
+		em.close();
+		return nutzerliste.get(0).getNutzertyp();
 	}
 
 	// Code von: https://blog.axxg.de/java-aes-verschluesselung-mit-beispiel/
