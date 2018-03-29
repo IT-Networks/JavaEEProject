@@ -1,0 +1,36 @@
+
+NutzerHandler:
+
+Inputparameter: 
+anmeldename und Klartextpasswort aus der Maske.
+Output: 
+	Fehlermeldungen:
+		- "Nutzer nicht gefunden."
+		- "Falsches Passwort."
+	- "Login erfolgreich".
+String checkPasswort(String anmeldename, String passwort);
+
+Inputparameter:
+Daten aus der Maske
+
+Output:
+	Fehlermeldungen:
+		- "Nutzer schon vorhanden."
+		- "Nutzerdaten unvollständig"
+	- "Erfolgreiche Registrierung!"
+String createNutzer(String vorname, String nachname, String anmeldename, String passwort, String nutzertyp);
+
+
+RelationHandler:
+
+Inputparameter:
+Daten aus der Maske: Startflughafen und Zielflughafen
+
+Output:
+	Fehlermeldungen:
+		- "Relation schon vorhanden."
+		- "Startort nicht gefunden."
+		- "Zielort nicht gefunden."
+
+	- "Erfolgreiche Anlage der Relation."
+String createRelation(String startort, String zielort);

@@ -4,14 +4,14 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the nutzer database table.
  * 
  */
 @Entity
-@Table(name="nutzer")
-@NamedQuery(name="Nutzer.findAll", query="SELECT n FROM Nutzer n")
+@Table(name = "nutzer")
+@NamedQueries({ @NamedQuery(name = "Nutzer.findAll", query = "SELECT n FROM Nutzer n"),
+		@NamedQuery(name = "Nutzer.findByName", query = "SELECT n FROM Nutzer n WHERE n.anmeldename = :name"), })
 public class Nutzer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,8 +28,8 @@ public class Nutzer implements Serializable {
 
 	private String vorname;
 
-	//bi-directional many-to-one association to Buchung
-	@OneToMany(mappedBy="nutzer")
+	// bi-directional many-to-one association to Buchung
+	@OneToMany(mappedBy = "nutzer")
 	private List<Buchung> buchungs;
 
 	public Nutzer() {

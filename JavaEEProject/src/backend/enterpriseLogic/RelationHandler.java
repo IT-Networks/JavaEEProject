@@ -74,7 +74,7 @@ public class RelationHandler implements RelationHandlerLocal {
 		em.getTransaction().commit();
 
 		em.close();
-		return "";
+		return "Erfolgreiche Anlage der Relation!";
 
 	}
 
