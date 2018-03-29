@@ -1,5 +1,12 @@
 package frontend_beans;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -9,16 +16,16 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import backend.enterpriseLogic.NutzerHandler;
 import frontend_controller.SessionUtils;
 
 @ManagedBean
 @RequestScoped
 public class LoginBean {
-	@Size(min = 4, max = 10)
+	
 	@NotEmpty
 	private String username;
 
-	@Size(min = 4, max = 20)
 	@NotEmpty
 	private String password;
 
@@ -38,25 +45,21 @@ public class LoginBean {
 		this.password = password;
 	}
 
-	public void login() {
-		if ("BootsFaces".equalsIgnoreCase(username) && "rocks!".equalsIgnoreCase(password)) {
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
-					"Congratulations! You've successfully logged in.");
-			FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
+	public void login() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+		NutzerHandler nh = new NutzerHandler();
+		String result = nh.checkPasswort(username, password);
+		FacesMessage msg;
+		if (result.equals("Login erfolgreich")) {
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+					result);
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", username);
 
 		} else {
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
-					"That's the wrong password. Hint: BootsFaces rocks!");
-			FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+					result);
 		}
+		FacesContext.getCurrentInstance().addMessage("loginForm:name", msg);
 	}
 
-	public void forgotPassword() {
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Default user name: BootsFaces");
-		FacesContext.getCurrentInstance().addMessage("loginForm:username", msg);
-		msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Default password: rocks!");
-		FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
-	}
 }

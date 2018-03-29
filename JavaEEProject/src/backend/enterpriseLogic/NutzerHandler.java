@@ -84,6 +84,8 @@ public class NutzerHandler {
 	public String checkPasswort(String anmeldename, String passwort)
 			throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
 			IllegalBlockSizeException, BadPaddingException {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
 		Query query = em.createNamedQuery("Nutzer.findByName").setParameter("name", anmeldename);
 		List<Nutzer> nutzer = new ArrayList<Nutzer>();
 		for (Object o : query.getResultList()) {
