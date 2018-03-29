@@ -2,7 +2,6 @@ package backend.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -23,10 +22,6 @@ public class Flugzeug implements Serializable {
 	private int sitzplaetze;
 
 	private String typ;
-
-	//bi-directional many-to-one association to Flug
-	@OneToMany(mappedBy="flugzeug")
-	private List<Flug> flugs;
 
 	public Flugzeug() {
 	}
@@ -61,28 +56,6 @@ public class Flugzeug implements Serializable {
 
 	public void setTyp(String typ) {
 		this.typ = typ;
-	}
-
-	public List<Flug> getFlugs() {
-		return this.flugs;
-	}
-
-	public void setFlugs(List<Flug> flugs) {
-		this.flugs = flugs;
-	}
-
-	public Flug addFlug(Flug flug) {
-		getFlugs().add(flug);
-		flug.setFlugzeug(this);
-
-		return flug;
-	}
-
-	public Flug removeFlug(Flug flug) {
-		getFlugs().remove(flug);
-		flug.setFlugzeug(null);
-
-		return flug;
 	}
 
 }

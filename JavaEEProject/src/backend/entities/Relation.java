@@ -2,35 +2,36 @@ package backend.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.List;
-
 
 /**
  * The persistent class for the relation database table.
  * 
  */
 @Entity
-@Table(name="relation")
-@NamedQuery(name="Relation.findAll", query="SELECT r FROM Relation r")
+@Table(name = "relation")
+@NamedQueries({ @NamedQuery(name = "Relation.findAll", query = "SELECT r FROM Relation r"),
+		@NamedQuery(name = "Relation.findRelations", query = "SELECT r FROM Relation r where r.startort = :start and r.zielort = :ziel or r.startort = :ziel and r.zielort = :start"),
+		@NamedQuery(name = "Relation.findbyID", query = "SELECT r FROM Relation r where r.relationid = :id") })
+
 public class Relation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int relationid;
 
-	//bi-directional many-to-one association to Flug
-	@OneToMany(mappedBy="relation")
+	private int distanz;
+
+	private Time flugzeit;
+
+	private String startort;
+
+	private String zielort;
+
+	// bi-directional many-to-one association to Flug
+	@OneToMany(mappedBy = "relation")
 	private List<Flug> flugs;
-
-	//bi-directional many-to-one association to Flughafen
-	@ManyToOne
-	@JoinColumn(name="startort")
-	private Flughafen flughafen1;
-
-	//bi-directional many-to-one association to Flughafen
-	@ManyToOne
-	@JoinColumn(name="zielort")
-	private Flughafen flughafen2;
 
 	public Relation() {
 	}
@@ -41,6 +42,38 @@ public class Relation implements Serializable {
 
 	public void setRelationid(int relationid) {
 		this.relationid = relationid;
+	}
+
+	public int getDistanz() {
+		return this.distanz;
+	}
+
+	public void setDistanz(int distanz) {
+		this.distanz = distanz;
+	}
+
+	public Time getFlugzeit() {
+		return this.flugzeit;
+	}
+
+	public void setFlugzeit(Time flugzeit) {
+		this.flugzeit = flugzeit;
+	}
+
+	public String getStartort() {
+		return this.startort;
+	}
+
+	public void setStartort(String startort) {
+		this.startort = startort;
+	}
+
+	public String getZielort() {
+		return this.zielort;
+	}
+
+	public void setZielort(String zielort) {
+		this.zielort = zielort;
 	}
 
 	public List<Flug> getFlugs() {
@@ -63,22 +96,6 @@ public class Relation implements Serializable {
 		flug.setRelation(null);
 
 		return flug;
-	}
-
-	public Flughafen getFlughafen1() {
-		return this.flughafen1;
-	}
-
-	public void setFlughafen1(Flughafen flughafen1) {
-		this.flughafen1 = flughafen1;
-	}
-
-	public Flughafen getFlughafen2() {
-		return this.flughafen2;
-	}
-
-	public void setFlughafen2(Flughafen flughafen2) {
-		this.flughafen2 = flughafen2;
 	}
 
 }

@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import backend.enterpriseLogic.NutzerHandler;
-import backend.enterpriseLogic.RelationHandlerLocal;
 import frontend_controller.SessionUtils;
 
 @ManagedBean

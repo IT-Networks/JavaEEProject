@@ -3,9 +3,7 @@ package backend.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Time;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -27,25 +25,11 @@ public class Flug implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date ankunft;
 
-	private float distanz;
+	private int flugzeugid;
 
-	private Time flugzeit;
+	private int mahlzeitid;
 
 	private BigDecimal preis;
-
-	//bi-directional many-to-one association to Buchung
-	@OneToMany(mappedBy="flug")
-	private List<Buchung> buchungs;
-
-	//bi-directional many-to-one association to Flugzeug
-	@ManyToOne
-	@JoinColumn(name="flugzeugid")
-	private Flugzeug flugzeug;
-
-	//bi-directional many-to-one association to Mahlzeit
-	@ManyToOne
-	@JoinColumn(name="mahlzeitid")
-	private Mahlzeit mahlzeit;
 
 	//bi-directional many-to-one association to Relation
 	@ManyToOne
@@ -79,20 +63,20 @@ public class Flug implements Serializable {
 		this.ankunft = ankunft;
 	}
 
-	public float getDistanz() {
-		return this.distanz;
+	public int getFlugzeugid() {
+		return this.flugzeugid;
 	}
 
-	public void setDistanz(float distanz) {
-		this.distanz = distanz;
+	public void setFlugzeugid(int flugzeugid) {
+		this.flugzeugid = flugzeugid;
 	}
 
-	public Time getFlugzeit() {
-		return this.flugzeit;
+	public int getMahlzeitid() {
+		return this.mahlzeitid;
 	}
 
-	public void setFlugzeit(Time flugzeit) {
-		this.flugzeit = flugzeit;
+	public void setMahlzeitid(int mahlzeitid) {
+		this.mahlzeitid = mahlzeitid;
 	}
 
 	public BigDecimal getPreis() {
@@ -101,44 +85,6 @@ public class Flug implements Serializable {
 
 	public void setPreis(BigDecimal preis) {
 		this.preis = preis;
-	}
-
-	public List<Buchung> getBuchungs() {
-		return this.buchungs;
-	}
-
-	public void setBuchungs(List<Buchung> buchungs) {
-		this.buchungs = buchungs;
-	}
-
-	public Buchung addBuchung(Buchung buchung) {
-		getBuchungs().add(buchung);
-		buchung.setFlug(this);
-
-		return buchung;
-	}
-
-	public Buchung removeBuchung(Buchung buchung) {
-		getBuchungs().remove(buchung);
-		buchung.setFlug(null);
-
-		return buchung;
-	}
-
-	public Flugzeug getFlugzeug() {
-		return this.flugzeug;
-	}
-
-	public void setFlugzeug(Flugzeug flugzeug) {
-		this.flugzeug = flugzeug;
-	}
-
-	public Mahlzeit getMahlzeit() {
-		return this.mahlzeit;
-	}
-
-	public void setMahlzeit(Mahlzeit mahlzeit) {
-		this.mahlzeit = mahlzeit;
 	}
 
 	public Relation getRelation() {

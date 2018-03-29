@@ -30,28 +30,31 @@ import backend.entities.Nutzer;
 @LocalBean
 public class NutzerHandler {
 
+	EntityManagerFactory emf = null;
+	EntityManager em = null;
+
 	/**
 	 * Default constructor.
 	 */
 	public NutzerHandler() {
+		emf = Persistence.createEntityManagerFactory("JavaEEProject");
+
+
 	}
+
 
 	public String createNutzer(String vorname, String nachname, String anmeldename, String passwort, String nutzertyp)
 			throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
 			IllegalBlockSizeException, BadPaddingException {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEEProject");
-		EntityManager em = emf.createEntityManager();
+		em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Query query = em.createNamedQuery("Nutzer.findAll");
+		Query query = em.createNamedQuery("Nutzer.findByName").setParameter("name", anmeldename);
 		List<Nutzer> nutzerliste = new ArrayList<Nutzer>();
 		for (Object o : query.getResultList()) {
 			nutzerliste.add((Nutzer) o);
 		}
-		for (Nutzer nutzerschleife : nutzerliste) {
-			String foranmeldename = nutzerschleife.getAnmeldename();
-			if (foranmeldename.equals(anmeldename)) {
-				return ErrorHandler.NUTZERSCHONVORHANDEN;
-			}
+		if (!nutzerliste.isEmpty()) {
+			return ErrorHandler.NUTZERSCHONVORHANDEN;
 		}
 		Nutzer nutzer = new Nutzer();
 		if (vorname != null && nachname != null && anmeldename != null && passwort != null && nutzertyp != null
@@ -65,33 +68,35 @@ public class NutzerHandler {
 			if (nutzertyp.equals("Mitarbeiter") || nutzertyp.equals("Manager")) {
 				nutzer.setNutzertyp(nutzertyp);
 			}
+			else {
+				return ErrorHandler.NUTZERTYPNICHTVORHANDEN;
+			}
 			em.persist(nutzer);
 			em.getTransaction().commit();
-
+			
 			em.close();
 		} else {
 			return ErrorHandler.NUTZERDATENUNVOLLSTAENDIG;
 		}
 		return "Erfolgreiche Registrierung!";
 	}
-	
-	public String checkPasswort(String anmeldename, String passwort) throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEEProject");
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
+
+	public String checkPasswort(String anmeldename, String passwort)
+			throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
+			IllegalBlockSizeException, BadPaddingException {
 		Query query = em.createNamedQuery("Nutzer.findByName").setParameter("name", anmeldename);
 		List<Nutzer> nutzer = new ArrayList<Nutzer>();
 		for (Object o : query.getResultList()) {
 			nutzer.add((Nutzer) o);
 		}
-		if(nutzer.isEmpty()) {
+		if (nutzer.isEmpty()) {
 			return ErrorHandler.NUTZERNICHTGEFUNDEN;
 		}
-		
-		if(!passwort.equals(decryptPasswort(nutzer.get(0).getPasswort()))) {
+
+		if (!passwort.equals(decryptPasswort(nutzer.get(0).getPasswort()))) {
 			return ErrorHandler.NUTZERPASSWORTFALSCH;
 		}
-		
+
 		return "Login erfolgreich.";
 	}
 

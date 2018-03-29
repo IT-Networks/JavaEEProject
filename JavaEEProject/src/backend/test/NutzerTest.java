@@ -19,7 +19,8 @@ public class NutzerTest {
 	private NutzerHandler myBean = new NutzerHandler();
 	@Test
 	public void testCreateNutzer() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-		assertEquals(ErrorHandler.NUTZERSCHONVORHANDEN, myBean.createNutzer("Halil", "Özdogan", "halil", "start123", "Manager"));
+		assertEquals("Erfolgreiche Registrierung!", myBean.createNutzer("Halil", "Özdogan", "Halil2", "start123", "Manager"));
+		assertEquals(ErrorHandler.NUTZERSCHONVORHANDEN, myBean.createNutzer("Halil", "Özdogan", "Halil", "start123", "Manager"));
 		assertEquals(ErrorHandler.NUTZERSCHONVORHANDEN, myBean.createNutzer("Dagobert", "Duck", "dagobert", "start123", "Mitarbeiter"));
 		assertEquals(ErrorHandler.NUTZERDATENUNVOLLSTAENDIG, myBean.createNutzer("", "Özdogan", "user", "start123", "Manager"));
 		assertEquals(ErrorHandler.NUTZERDATENUNVOLLSTAENDIG, myBean.createNutzer("Halil", "", "user", "start123", "Manager"));
@@ -29,9 +30,9 @@ public class NutzerTest {
 	}
 	@Test
 	public void testCheckPasswort() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-		assertEquals("Login erfolgreich.", myBean.checkPasswort("testuser", "start123"));
-		assertEquals(ErrorHandler.NUTZERNICHTGEFUNDEN, myBean.checkPasswort("testuserrrrrr", "start123"));
-		assertEquals(ErrorHandler.NUTZERPASSWORTFALSCH, myBean.checkPasswort("testuser", "falsch"));
+		assertEquals("Login erfolgreich.", myBean.checkPasswort("Halil", "start123"));
+		assertEquals(ErrorHandler.NUTZERNICHTGEFUNDEN, myBean.checkPasswort("Halillllll", "start123"));
+		assertEquals(ErrorHandler.NUTZERPASSWORTFALSCH, myBean.checkPasswort("Halil", "falsch"));
 		
 	}
 
