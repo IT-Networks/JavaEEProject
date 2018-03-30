@@ -28,6 +28,7 @@ public class FlugzeugHandler extends DatabaseHandler {
 		em.getTransaction().begin();
 
 		if (hersteller == null || typ == null || hersteller.isEmpty() || typ.isEmpty()) {
+			em.close();
 			return ErrorHandler.DATENUNVOLLSTAENDIG;
 		}
 		Flugzeug flugzeug = new Flugzeug(hersteller, typ, sitzplaetze);
@@ -53,6 +54,7 @@ public class FlugzeugHandler extends DatabaseHandler {
 						+ flugzeug.getTyp() + " (" + flugzeug.getSitzplaetze() + " Sitzplätze)");
 			}
 		}
+		em.close();
 		return flugzeugliste;
 	}
 

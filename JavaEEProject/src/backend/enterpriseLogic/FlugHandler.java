@@ -10,7 +10,6 @@ import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 import backend.entities.Flug;
-import backend.entities.Flugzeug;
 import backend.entities.Relation;
 
 /**
@@ -39,6 +38,7 @@ public class FlugHandler extends DatabaseHandler{
 			relationliste.add((Relation) o);
 		}
 		if(relationliste.isEmpty()) {
+			em.close();
 			return ErrorHandler.RELATIONNICHTVORHANDEN;
 		}
 		int flugnummer = 1;

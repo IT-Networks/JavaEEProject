@@ -42,6 +42,7 @@ public class NutzerHandler extends DatabaseHandler {
 			nutzerliste.add((Nutzer) o);
 		}
 		if (!nutzerliste.isEmpty()) {
+			em.close();
 			return ErrorHandler.NUTZERSCHONVORHANDEN;
 		}
 		Nutzer nutzer = new Nutzer();
@@ -56,6 +57,7 @@ public class NutzerHandler extends DatabaseHandler {
 			if (nutzertyp.equals("Mitarbeiter") || nutzertyp.equals("Manager")) {
 				nutzer.setNutzertyp(nutzertyp);
 			} else {
+				em.close();
 				return ErrorHandler.NUTZERTYPNICHTVORHANDEN;
 			}
 			em.persist(nutzer);
@@ -79,10 +81,12 @@ public class NutzerHandler extends DatabaseHandler {
 			nutzer.add((Nutzer) o);
 		}
 		if (nutzer.isEmpty()) {
+			em.close();
 			return ErrorHandler.NUTZERNICHTGEFUNDEN;
 		}
 
 		if (!passwort.equals(decryptPasswort(nutzer.get(0).getPasswort()))) {
+			em.close();
 			return ErrorHandler.NUTZERPASSWORTFALSCH;
 		}
 		em.close();
