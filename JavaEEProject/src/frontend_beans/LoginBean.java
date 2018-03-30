@@ -11,13 +11,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.Size;
-import javax.servlet.http.HttpSession;
+
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import backend.enterpriseLogic.NutzerHandler;
-import frontend_controller.SessionUtils;
 
 @ManagedBean
 @RequestScoped
@@ -49,12 +47,12 @@ public class LoginBean {
 		NutzerHandler nh = new NutzerHandler();
 		String result = nh.checkPasswort(username, password);
 		FacesMessage msg;
-		if (result.equals("Login erfolgreich.")) {
+		if (result.equals("Login erfolgreich")) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
 					result);
-			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username", username);
-
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", username);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("profil", "Mitarbeiter");
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("rolle", "Manager");
 		} else {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
 					result);
