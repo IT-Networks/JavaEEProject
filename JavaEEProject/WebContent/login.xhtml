@@ -11,7 +11,7 @@
 
 <h:body>
 
-	<h:form id="loginForm">
+	<h:form id="loginForm" rendered="#{!userInfoBean.loggedIn}">
 		<b:container layout="fluid">
 			<b:panel title="Login" look="primary" collapsible="false">
 				<b:row>
@@ -51,7 +51,8 @@
 				<b:row>
 					<b:column span="2" offset="2">
 						<b:commandButton value="Einloggen"
-							onclick="ajax:loginBean.login()" update=":loginForm :navigationBar" look="primary"
+							onclick="ajax:loginBean.login()"
+							update=":loginForm :navigationBar" look="primary"
 							style="width:100%" />
 					</b:column>
 				</b:row>

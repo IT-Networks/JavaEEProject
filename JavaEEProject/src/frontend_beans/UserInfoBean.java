@@ -23,10 +23,10 @@ public class UserInfoBean {
 
 	public boolean isLoggedIn() {
 		HttpSession session = SessionUtils.getSession();
-		if(session.getAttribute("username") == null)
+		if(session.getAttribute("user") == null)
 			isLoggedIn = false;
 		else 
-			isLoggedIn = false;	    
+			isLoggedIn = true;	    
 		return isLoggedIn;
 	}
 

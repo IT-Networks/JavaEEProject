@@ -14,10 +14,13 @@
 		<class>backend.entities.Flugzeug</class>
 		<class>backend.entities.Mahlzeit</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://giesbrechthosting.de:3306/fis-db?useSSL=false"/>
-			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value="start123"/>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://giesbrechthosting.de:3306/fis-db?useSSL=false" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password"
+				value="start123" />
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
 		</properties>
 	</persistence-unit>
 </persistence>

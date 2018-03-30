@@ -62,13 +62,13 @@ public class FluegeRelationBean {
 		if(result.equals("")) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
 					result);
-			FacesContext.getCurrentInstance().addMessage("relationForm:container", msg);
+			FacesContext.getCurrentInstance().addMessage("relationForm:Distanz", msg);
 		}
 		else
 		{
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
 					result);
-			FacesContext.getCurrentInstance().addMessage("relationForm:container", msg);
+			FacesContext.getCurrentInstance().addMessage("relationForm:Distanz", msg);
 		}
 	}
 

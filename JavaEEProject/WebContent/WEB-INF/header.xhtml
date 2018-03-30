@@ -21,13 +21,12 @@ body {
 	
 }
 </style>
-	<b:navBar brand="Brand" brandHref="#" id="navigationBar"
-		position="top"
+	<b:navBar brand="Brand" brandHref="#" id="navigationBar" position="top"
 		sticky="false" fixed="top">
-		<b:navbarLinks contentDisabled="#{navBarBean.navBarLinksDisabled}">
+		<b:navbarLinks>
 			<b:navLink value="Home" href="index.xhtml"></b:navLink>
 			<b:navLink value="Aktuelle Flüge" href="currentFluege.xhtml"></b:navLink>
-			<b:navLink value="Login" href="login.xhtml"></b:navLink>
+			<b:navLink value="Login" href="login.xhtml" rendered="#{!userInfoBean.loggedIn}"></b:navLink>
 			<b:dropMenu value="Manager Features"
 				rendered="#{userInfoBean.userManager}">
 				<b:navLink value="Flüge und Relationen"
@@ -41,8 +40,10 @@ body {
 				<b:navLink value="Mahlzeiten zuordnen" href="#"></b:navLink>
 				<b:navLink value="Buchungen abrufen" href="#"></b:navLink>
 			</b:dropMenu>
-			<b:button look="primary" value="Logout" rendered="#{userInfoBean.loggedIn}" href="logout.xhtml"/>
-			<b:navLink value="Logout" href="logout.xhtml" rendered=></b:navLink>
+			<h:form>
+				<b:commandButton value="Ausloggen" onclick="ajax:loginBean.logout()"
+					update=":navigationBar" look="primary" rendered="#{userInfoBean.loggedIn}"/>
+			</h:form>
 		</b:navbarLinks>
 	</b:navBar>
 </h:head>

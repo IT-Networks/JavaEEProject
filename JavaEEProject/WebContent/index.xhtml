@@ -6,31 +6,6 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Flüge buchen leicht gemacht</title>
-	<meta name="author" content="Riccardo Massera"></meta>
-	<style type="text/css">
-.form-signin {
-	margin: 0 auto;
-	max-width: 330px;
-	padding: 15px;
-}
-</style>
+	<ui:include src="/WEB-INF/header.xhtml" />
 </h:head>
-<h:body>
-
-	<b:navBar brand="Brand" brandHref="#" id="dropMenuExample"
-		contentDisabled="#{navBarBean.navBarDisabled}">
-		<b:navbarLinks contentDisabled="#{navBarBean.navBarLinksDisabled}">
-			<b:navLink value="Home" href="index.xhtml"></b:navLink>
-			<b:navLink value="Aktuelle Flüge" href="currentFluege.xhtml"></b:navLink>
-			<b:navLink value="Login" href="login.xhtml"></b:navLink>
-			<b:dropMenu value="Flüge"
-				contentDisabled="#{navBarBean.dropMenuDisabled}">
-				<b:navLink value="Flug anlegen" href="#"></b:navLink>
-				<b:navLink value="Flughafen hinzufügen" href="#"></b:navLink>
-			</b:dropMenu>
-		</b:navbarLinks>
-	</b:navBar>
-</h:body>
 </html>

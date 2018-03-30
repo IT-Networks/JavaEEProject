@@ -55,11 +55,25 @@ public class LoginBean {
 			session.setAttribute("user", username);
 			session.setAttribute("profil", "Mitarbeiter");
 			session.setAttribute("role", nh.getNutzertyp(username));
-		} else {
-			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+			FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
+		} else if(result.equals("Unter dem angebenen Nutzernamen konnte kein Nutzer gefunden werden!")){
+			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
 					result);
+			FacesContext.getCurrentInstance().addMessage("loginForm:username", msg);
 		}
-		FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
+		else {
+			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
+					result);
+			FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
+		}
+		
+	}
+	
+	public void logout()
+	{
+		HttpSession session = SessionUtils.getSession();
+		session.invalidate();
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 	}
 
 }
