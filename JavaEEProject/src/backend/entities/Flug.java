@@ -5,14 +5,14 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
 /**
  * The persistent class for the flug database table.
  * 
  */
 @Entity
-@Table(name="flug")
-@NamedQuery(name="Flug.findAll", query="SELECT f FROM Flug f")
+@Table(name = "flug")
+@NamedQueries({ @NamedQuery(name = "Flug.findAll", query = "SELECT f FROM Flug f"),
+		@NamedQuery(name = "Flug.findbyRelationID", query = "SELECT f FROM Relation f where f.relationid = :id") })
 public class Flug implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,16 +24,16 @@ public class Flug implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date ankunft;
-
+	@JoinColumn(nullable = true)
 	private int flugzeugid;
-
+	@JoinColumn(nullable = true)
 	private int mahlzeitid;
 
 	private BigDecimal preis;
 
-	//bi-directional many-to-one association to Relation
+	// bi-directional many-to-one association to Relation
 	@ManyToOne
-	@JoinColumn(name="relationid")
+	@JoinColumn(name = "relationid")
 	private Relation relation;
 
 	public Flug() {

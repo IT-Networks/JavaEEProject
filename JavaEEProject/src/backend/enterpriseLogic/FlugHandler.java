@@ -7,12 +7,10 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import backend.entities.Flug;
+import backend.entities.Flugzeug;
 import backend.entities.Relation;
 
 /**
@@ -20,14 +18,13 @@ import backend.entities.Relation;
  */
 @Stateless
 @LocalBean
-public class FlugHandler {
-	EntityManagerFactory emf = null;
-	EntityManager em = null;
+public class FlugHandler extends DatabaseHandler{
+
     /**
      * Default constructor. 
      */
     public FlugHandler() {
-		emf = Persistence.createEntityManagerFactory("JavaEEProject");
+		super();
     }
     
     public String createFlug(Date abflug, Date ankunft, int relationid, double preis) {
@@ -37,14 +34,21 @@ public class FlugHandler {
 		em.getTransaction().begin();
 		
 		List<Relation> relationliste = new ArrayList<Relation>();
-		Query query = em.createNamedQuery("Relation.findbyID").setParameter("id", relationid);
-		for (Object o : query.getResultList()) {
+		Query queryRelation = em.createNamedQuery("Relation.findbyID").setParameter("id", relationid);
+		for (Object o : queryRelation.getResultList()) {
 			relationliste.add((Relation) o);
 		}
 		if(relationliste.isEmpty()) {
 			return ErrorHandler.RELATIONNICHTVORHANDEN;
 		}
+		int flugnummer = 1;
+		Query queryFlug = em.createNamedQuery("Flug.findbyRelationID").setParameter("id", relationid);
+		for (Object o : queryFlug.getResultList()) {
+			flugnummer+=1;
+		}
+		
 		Flug flug = new Flug();
+		flug.setFlugid("MH"+relationid+"/"+flugnummer);
 		flug.setAbflug(abflug);
 		flug.setAnkunft(ankunft);
 		flug.setPreis(BigDecimal.valueOf(preis));
@@ -56,6 +60,24 @@ public class FlugHandler {
 		
 		em.close();
     	return "";
+    }
+    
+    public List<String> getAllRelationen() {
+		List<String> relationenliste = new ArrayList<String>();
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query query = em.createNamedQuery("Relation.findAll");
+		List<Relation> relationenlisteDB = new ArrayList<Relation>();
+		for (Object o : query.getResultList()) {
+			relationenlisteDB.add((Relation) o);
+		}
+		if(!relationenlisteDB.isEmpty()) {
+			for (Relation relation : relationenlisteDB) {
+				relationenliste.add(relation.getRelationid() + ". Relation: Startort: " + relation.getStartort() + ", Zielort: "
+						+ relation.getZielort() + " (" + relation.getDistanz() + " km, " + relation.getFlugzeit() + " Stunden)");
+			}
+		}
+		return relationenliste;
     }
 
 }

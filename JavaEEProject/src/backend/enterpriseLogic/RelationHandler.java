@@ -6,9 +6,6 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import backend.entities.Flughafen;
@@ -19,15 +16,10 @@ import backend.entities.Relation;
  */
 @Stateless
 @LocalBean
-public class RelationHandler {
-	private EntityManagerFactory emf = null;
-	private EntityManager em = null;
+public class RelationHandler extends DatabaseHandler {
 
-	/**
-	 * Default constructor.
-	 */
 	public RelationHandler() {
-		emf = Persistence.createEntityManagerFactory("JavaEEProject");
+		super();
 	}
 
 	public String createRelation(String startort, String zielort, String flugzeit, int distanz) {

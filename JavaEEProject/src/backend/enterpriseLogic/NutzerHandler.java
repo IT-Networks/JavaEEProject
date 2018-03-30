@@ -16,9 +16,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import backend.entities.Nutzer;
@@ -28,17 +25,10 @@ import backend.entities.Nutzer;
  */
 @Stateless
 @LocalBean
-public class NutzerHandler {
+public class NutzerHandler extends DatabaseHandler {
 
-	EntityManagerFactory emf = null;
-	EntityManager em = null;
-
-	/**
-	 * Default constructor.
-	 */
 	public NutzerHandler() {
-		emf = Persistence.createEntityManagerFactory("JavaEEProject");
-
+		super();
 	}
 
 	public String createNutzer(String vorname, String nachname, String anmeldename, String passwort, String nutzertyp)
@@ -73,7 +63,7 @@ public class NutzerHandler {
 
 			em.close();
 		} else {
-			return ErrorHandler.NUTZERDATENUNVOLLSTAENDIG;
+			return ErrorHandler.DATENUNVOLLSTAENDIG;
 		}
 		return "Erfolgreiche Registrierung!";
 	}

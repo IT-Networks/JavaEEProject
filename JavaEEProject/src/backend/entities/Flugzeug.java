@@ -24,6 +24,12 @@ public class Flugzeug implements Serializable {
 	private String typ;
 
 	public Flugzeug() {
+		
+	}
+	public Flugzeug(String hersteller, String typ, int sitzplaetze) {
+		this.hersteller = hersteller;
+		this.typ = typ;
+		this.sitzplaetze = sitzplaetze;
 	}
 
 	public int getFlugzeugid() {

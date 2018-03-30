@@ -22,11 +22,11 @@ public class NutzerTest {
 		assertEquals(ErrorHandler.NUTZERSCHONVORHANDEN, myBean.createNutzer("Halil", "Özdogan", "Halil2", "start123", "Manager"));
 		assertEquals(ErrorHandler.NUTZERSCHONVORHANDEN, myBean.createNutzer("Halil", "Özdogan", "Halil", "start123", "Manager"));
 		assertEquals(ErrorHandler.NUTZERSCHONVORHANDEN, myBean.createNutzer("Dagobert", "Duck", "dagobert", "start123", "Mitarbeiter"));
-		assertEquals(ErrorHandler.NUTZERDATENUNVOLLSTAENDIG, myBean.createNutzer("", "Özdogan", "user", "start123", "Manager"));
-		assertEquals(ErrorHandler.NUTZERDATENUNVOLLSTAENDIG, myBean.createNutzer("Halil", "", "user", "start123", "Manager"));
-		assertEquals(ErrorHandler.NUTZERDATENUNVOLLSTAENDIG, myBean.createNutzer("Halil", "Özdogan", "", "start123", "Manager"));
-		assertEquals(ErrorHandler.NUTZERDATENUNVOLLSTAENDIG, myBean.createNutzer("Halil", "Özdogan", "user", "", "Manager"));
-		assertEquals(ErrorHandler.NUTZERDATENUNVOLLSTAENDIG, myBean.createNutzer("Halil", "Özdogan", "user", "start123", ""));
+		assertEquals(ErrorHandler.DATENUNVOLLSTAENDIG, myBean.createNutzer("", "Özdogan", "user", "start123", "Manager"));
+		assertEquals(ErrorHandler.DATENUNVOLLSTAENDIG, myBean.createNutzer("Halil", "", "user", "start123", "Manager"));
+		assertEquals(ErrorHandler.DATENUNVOLLSTAENDIG, myBean.createNutzer("Halil", "Özdogan", "", "start123", "Manager"));
+		assertEquals(ErrorHandler.DATENUNVOLLSTAENDIG, myBean.createNutzer("Halil", "Özdogan", "user", "", "Manager"));
+		assertEquals(ErrorHandler.DATENUNVOLLSTAENDIG, myBean.createNutzer("Halil", "Özdogan", "user", "start123", ""));
 	}
 	@Test
 	public void testCheckPasswort() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
