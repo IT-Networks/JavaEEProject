@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 public class SessionUtils {
 
+
 	public static HttpSession getSession() {
 		return (HttpSession) FacesContext.getCurrentInstance()
 				.getExternalContext().getSession(false);
@@ -22,11 +23,12 @@ public class SessionUtils {
 		return session.getAttribute("username").toString();
 	}
 
-	public static String getUserId() {
+	public static String getUserRole() {
 		HttpSession session = getSession();
 		if (session != null)
-			return (String) session.getAttribute("userid");
+			return (String) session.getAttribute("role");
 		else
 			return null;
 	}
+
 }

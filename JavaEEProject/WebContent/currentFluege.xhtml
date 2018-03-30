@@ -8,18 +8,24 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Flüge buchen leicht gemacht</title>
 	<meta name="author" content="Riccardo Massera"></meta>
-	<style type="text/css">
-.form-signin {
-	margin: 0 auto;
-	max-width: 330px;
-	padding: 15px;
+	<style>
+body {
+	background-image: url("img/island.jpeg");
+	background-color: #cccccc;
+	background-size:     cover;                
+    background-repeat:   no-repeat;
+    background-position: center center;              
 }
-</style>
-</h:head>
-<h:body>
+#dropMenuExample{
 
+}
+
+</style>
 	<b:navBar brand="Brand" brandHref="#" id="dropMenuExample"
-		contentDisabled="#{navBarBean.navBarDisabled}">
+		contentDisabled="#{navBarBean.navBarDisabled}"
+		position="top" 
+		sticky="false"
+		fixed="top">
 		<b:navbarLinks contentDisabled="#{navBarBean.navBarLinksDisabled}">
 			<b:navLink value="Home" href="index.xhtml"></b:navLink>
 			<b:navLink value="Aktuelle Flüge" href="currentFluege.xhtml"></b:navLink>
@@ -31,5 +37,5 @@
 			</b:dropMenu>
 		</b:navbarLinks>
 	</b:navBar>
-</h:body>
+</h:head>
 </html>

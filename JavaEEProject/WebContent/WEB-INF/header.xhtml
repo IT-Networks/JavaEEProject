@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Flüge buchen leicht gemacht</title>
+	<meta name="author" content="Riccardo Massera"></meta>
+	<style>
+body {
+	background-image: url("img/island.jpeg");
+	background-color: #cccccc;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#dropMenuExample {
+	
+}
+</style>
+	<b:navBar brand="Brand" brandHref="#" id="navigationBar"
+		position="top"
+		sticky="false" fixed="top">
+		<b:navbarLinks contentDisabled="#{navBarBean.navBarLinksDisabled}">
+			<b:navLink value="Home" href="index.xhtml"></b:navLink>
+			<b:navLink value="Aktuelle Flüge" href="currentFluege.xhtml"></b:navLink>
+			<b:navLink value="Login" href="login.xhtml"></b:navLink>
+			<b:dropMenu value="Manager Features"
+				rendered="#{userInfoBean.userManager}">
+				<b:navLink value="Flüge und Relationen"
+					href="fluegeRelationen.xhtml"></b:navLink>
+				<b:navLink value="Flugzeuge zuweisen" href="#"></b:navLink>
+				<b:navLink value="Auslastungen der Flüge" href="#"></b:navLink>
+			</b:dropMenu>
+			<b:dropMenu value="Flüge">
+				<b:navLink value="Buchungen entgegennehmen" href="#"></b:navLink>
+				<b:navLink value="Passagiere anlegen" href="#"></b:navLink>
+				<b:navLink value="Mahlzeiten zuordnen" href="#"></b:navLink>
+				<b:navLink value="Buchungen abrufen" href="#"></b:navLink>
+			</b:dropMenu>
+			<b:button look="primary" value="Logout" rendered="#{userInfoBean.loggedIn}" href="logout.xhtml"/>
+			<b:navLink value="Logout" href="logout.xhtml" rendered=></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+</h:head>
+</html>

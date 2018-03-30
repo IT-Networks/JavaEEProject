@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import backend.enterpriseLogic.NutzerHandler;
-import frontend_controller.SessionUtils;
 
 @ManagedBean
 @RequestScoped
