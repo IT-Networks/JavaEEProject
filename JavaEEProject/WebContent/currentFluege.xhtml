@@ -8,5 +8,26 @@
 <h:head>
 	<ui:include src="/WEB-INF/header.xhtml" />
 </h:head>
+<h:body>
+	<h:form id="currentFlightsForm">
+		<b:container fluid="true">
+		<b:panel title="Aktuelle Flüge" look="primary" collapsible="false">
+		<b:row>
+		<b:column medium-screen="6">
+			<b:dataTable value="#{currentFluegeBean.allFluege}" var="flug">
+				<b:dataTableColumn value="#{flug.start}" />
+				<b:dataTableColumn value="#{flug.goal}" />
+				<b:dataTableColumn value="#{flug.name}" />
+				<b:dataTableColumn value="#{flug.food}" />
+				<b:dataTableColumn value="#{flug.passagner}" />
+			</b:dataTable>
+			</b:column>
+			</b:row>
+			</b:panel>
+		</b:container>
+
+	</h:form>
+
+</h:body>
 
 </html>

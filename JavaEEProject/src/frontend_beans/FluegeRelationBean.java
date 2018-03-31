@@ -8,7 +8,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
-
+import backend.enterpriseLogic.FlugHandler;
+import backend.enterpriseLogic.FlugzeugHandler;
 import backend.enterpriseLogic.RelationHandler;
 
 @ManagedBean
@@ -45,9 +46,24 @@ public class FluegeRelationBean {
 	}
 
 	private List<String> airports;
+	
+	private List<String> relations;
+	
+	private List<String> airplains;
 
+	public List<String> getRelations() {
+		FlugHandler fh = new FlugHandler();
+		relations = fh.getAllRelationen();
+		return relations;
+	}
+
+	public void setRelations(List<String> relations) {
+		this.relations = relations;
+	}
 
 	public List<String> getAirports() {
+		RelationHandler rh = new RelationHandler();
+		airports = rh.getAllFlughafennamen();
 		return airports;
 	}
 
@@ -71,6 +87,12 @@ public class FluegeRelationBean {
 			FacesContext.getCurrentInstance().addMessage("relationForm:Distanz", msg);
 		}
 	}
+	
+	public void assignAirplainToRelation()
+	{
+		FlugzeugHandler fh = new FlugzeugHandler();
+		fh.assignFlugzeugToFlug();
+	}
 
 	public String getStartLocation() {
 		return startLocation;
@@ -86,6 +108,16 @@ public class FluegeRelationBean {
 
 	public void setGoalLocation(String goalLocation) {
 		this.goalLocation = goalLocation;
+	}
+
+	public List<String> getAirplains() {
+		FlugzeugHandler fh = new FlugzeugHandler();
+		airplains = fh.getAllFlugzeuge();
+		return airplains;
+	}
+
+	public void setAirplains(List<String> airplains) {
+		this.airplains = airplains;
 	}
 
 

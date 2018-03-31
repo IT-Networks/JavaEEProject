@@ -90,9 +90,9 @@
 						<h:outputText value="Relation" for="relationDropDown" />
 					</b:column>
 					<b:column medium-screen="4">
-						<b:selectOneMenu value="#{fluegeRelationBean.startLocation}"
+						<b:selectOneMenu value="Wählen Sie die Route"
 							id="relationDropDown">
-							<f:selectItems value="#{fluegeRelationBean.airports}" />
+							<f:selectItems value="#{fluegeRelationBean.relations}" />
 						</b:selectOneMenu>
 					</b:column>
 				</b:row>
@@ -101,16 +101,16 @@
 						<h:outputText value="Flugzeug" for="plainDropDown" />
 					</b:column>
 					<b:column medium-screen="4">
-						<b:selectOneMenu value="#{fluegeRelationBean.goalLocation}"
+						<b:selectOneMenu value="Wählen Sie ein Flugzeug"
 							id="plainDropDown">
-							<f:selectItems value="#{fluegeRelationBean.airports}" />
+							<f:selectItems value="#{fluegeRelationBean.airplains}" />
 						</b:selectOneMenu>
 					</b:column>
 				</b:row>
 				<b:row>
 					<b:column span="2" offset="2">
 						<b:commandButton value="Speichern"
-							onclick="ajax:loginBean.login()" update="@form" look="primary"
+							onclick="ajax:fluegeRelationBean.assignAirplainToRelation()" update="@form" look="primary"
 							style="width:100%" />
 					</b:column>
 				</b:row>
