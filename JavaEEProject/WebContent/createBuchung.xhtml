@@ -9,19 +9,22 @@
 	<ui:include src="/WEB-INF/header.xhtml" />
 </h:head>
 <h:body>
-	<h:form id="currentFlightsForm">
+	<h:form id="buchungForm">
 		<b:container layout="fluid">
-		<b:panel title="Aktuelle Flüge" look="primary" collapsible="false">
-			<b:dataTable value="#{currentFluegeBean.allFluege}" var="flug">
-				<b:dataTableColumn value="#{flug.start}" />
-				<b:dataTableColumn value="#{flug.goal}" />
-				<b:dataTableColumn value="#{flug.name}" />
-				<b:dataTableColumn value="#{flug.food}" />
-				<b:dataTableColumn value="#{flug.passagner}" />
-			</b:dataTable>
+			<b:panel title="Buchung anlegen" look="primary" collapsible="false">
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Flug" for="fluegeDropDown" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:selectOneMenu value="Bitte eine Flug auswählen"
+							id="fluegeDropDown">
+							<f:selectItems value="#{currentFluegeBean.allFluege}" var="flug" itemLabel="#{flug.name}"/>
+						</b:selectOneMenu>
+					</b:column>
+				</b:row>
 			</b:panel>
 		</b:container>
-
 	</h:form>
 
 </h:body>
