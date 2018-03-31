@@ -12,7 +12,8 @@ import java.util.Date;
 @Entity
 @Table(name = "flug")
 @NamedQueries({ @NamedQuery(name = "Flug.findAll", query = "SELECT f FROM Flug f"),
-		@NamedQuery(name = "Flug.findbyRelationID", query = "SELECT f FROM Relation f where f.relationid = :id") })
+		@NamedQuery(name = "Flug.findbyRelationID", query = "SELECT f FROM Flug f where f.relation = :id"),
+		@NamedQuery(name = "Flug.findbyID", query = "SELECT f FROM Flug f where f.flugid = :id") })
 public class Flug implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,9 +25,8 @@ public class Flug implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date ankunft;
-	@JoinColumn(nullable = true)
+	
 	private int flugzeugid;
-	@JoinColumn(nullable = true)
 	private int mahlzeitid;
 
 	private BigDecimal preis;

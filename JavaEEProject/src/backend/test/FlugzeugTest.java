@@ -30,5 +30,10 @@ public class FlugzeugTest {
 			System.out.println(str);
 		}
 	}
+	
+	@Test
+	public void testAssignFlugToFlugzeug() {
+		assertEquals("", myBean.assignFlugzeugToFlug(2, "MH1/1"));
+	}
 
 }

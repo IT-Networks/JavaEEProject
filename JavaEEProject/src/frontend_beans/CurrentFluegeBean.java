@@ -12,7 +12,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
-import backend.enterpriseLogic.Flug;
+import backend.models.Flug2;
 
 @ManagedBean
 @RequestScoped
@@ -20,23 +20,23 @@ public class CurrentFluegeBean {
 
 	
 @NotNull
-private List<Flug> allFluege;
+private List<Flug2> allFluege;
 
 
 
-public List<Flug> getAllFluege() {
-	allFluege = new ArrayList<Flug>();
+public List<Flug2> getAllFluege() {
+	allFluege = new ArrayList<Flug2>();
 	List<String> s = new ArrayList<String>();
 	s.add("Markus");
 	s.add("Halil");
-	Flug f = new Flug("Start Platz", "Ziel", "Pommes", "Flug 63",s);
-	Flug g = new Flug("Start Platz", "Ziel", "Pommes", "Flug 64",s);
+	Flug2 f = new Flug2("Start Platz", "Ziel", "Pommes", "Flug 63",s);
+	Flug2 g = new Flug2("Start Platz", "Ziel", "Pommes", "Flug 64",s);
 	allFluege.add(f);
 	allFluege.add(g);
 	return allFluege;
 }
 
-public void setAllFluege(List<Flug> allFluege) {
+public void setAllFluege(List<Flug2> allFluege) {
 	this.allFluege = allFluege;
 }
 

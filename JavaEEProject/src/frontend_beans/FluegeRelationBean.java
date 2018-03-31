@@ -75,7 +75,7 @@ public class FluegeRelationBean {
 		RelationHandler rh = new RelationHandler();
 		String result = rh.createRelation(startLocation, goalLocation, time, Integer.parseInt(distance));
 		FacesMessage msg;
-		if(result.equals("")) {
+		if(result.equals("Erfolgreiche Anlage der Relation!")) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
 					result);
 			FacesContext.getCurrentInstance().addMessage("relationForm:Distanz", msg);
@@ -91,7 +91,7 @@ public class FluegeRelationBean {
 	public void assignAirplainToRelation()
 	{
 		FlugzeugHandler fh = new FlugzeugHandler();
-		fh.assignFlugzeugToFlug();
+		//fh.assignFlugzeugToFlug();
 	}
 
 	public String getStartLocation() {

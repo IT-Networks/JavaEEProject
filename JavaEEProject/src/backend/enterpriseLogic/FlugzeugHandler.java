@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
+import backend.entities.Flug;
 import backend.entities.Flugzeug;
 
 /**
@@ -36,7 +37,7 @@ public class FlugzeugHandler extends DatabaseHandler {
 		em.getTransaction().commit();
 
 		em.close();
-		return "Erfolgreiche Anlage des Flugzeugs!";
+		return SuccessHandler.FLUGZEUGANLAGE;
 	}
 
 	public List<String> getAllFlugzeuge() {
@@ -48,18 +49,35 @@ public class FlugzeugHandler extends DatabaseHandler {
 		for (Object o : query.getResultList()) {
 			flugzeuglisteDB.add((Flugzeug) o);
 		}
-		if(!flugzeuglisteDB.isEmpty()) {
+		if (!flugzeuglisteDB.isEmpty()) {
 			for (Flugzeug flugzeug : flugzeuglisteDB) {
-				flugzeugliste.add(flugzeug.getFlugzeugid() + ". Flugzeug: " + flugzeug.getHersteller() + " "
-						+ flugzeug.getTyp() + " (" + flugzeug.getSitzplaetze() + " Sitzplätze)");
+				if (flugzeug.getFlugzeugid() != 1) {
+					int id = flugzeug.getFlugzeugid() - 1;
+					flugzeugliste.add(id + ". Flugzeug: " + flugzeug.getHersteller() + " "
+							+ flugzeug.getTyp() + " (" + flugzeug.getSitzplaetze() + " Sitzplätze)");
+				}
+
 			}
 		}
 		em.close();
 		return flugzeugliste;
 	}
 
-	public String assignFlugzeugToFlug() {
-		return "";
+	public String assignFlugzeugToFlug(int flugzeugid, String flugid) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query queryFlug = em.createNamedQuery("Flug.findbyID").setParameter("id", flugid);
+		List<Flug> flugliste = new ArrayList<Flug>();
+		for (Object o : queryFlug.getResultList()) {
+			flugliste.add((Flug) o);
+		}
+		Flug flug = new Flug();
+		flug = flugliste.get(0);
+		flug.setFlugzeugid(flugzeugid);
+		em.merge(flug);
+		em.getTransaction().commit();
+		em.close();
+		return SuccessHandler.FLUGZEUGANLAGE;
 	}
 
 }

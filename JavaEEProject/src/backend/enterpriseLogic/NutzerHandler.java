@@ -43,7 +43,6 @@ public class NutzerHandler extends DatabaseHandler {
 		}
 		if (!nutzerliste.isEmpty()) {
 			em.close();
-			
 			return ErrorHandler.NUTZERSCHONVORHANDEN;
 		}
 		Nutzer nutzer = new Nutzer();
@@ -59,21 +58,16 @@ public class NutzerHandler extends DatabaseHandler {
 				nutzer.setNutzertyp(nutzertyp);
 			} else {
 				em.close();
-				
 				return ErrorHandler.NUTZERTYPNICHTVORHANDEN;
 			}
 			em.persist(nutzer);
 			em.getTransaction().commit();
-
-			em.close();
 		} else {
 			em.close();
-			
 			return ErrorHandler.DATENUNVOLLSTAENDIG;
 		}
 		em.close();
-		
-		return "Erfolgreiche Registrierung!";
+		return SuccessHandler.REGISTRIERUNG;
 	}
 
 	public String checkPasswort(String anmeldename, String passwort)
@@ -99,7 +93,7 @@ public class NutzerHandler extends DatabaseHandler {
 		}
 		em.close();
 		
-		return "Login erfolgreich.";
+		return SuccessHandler.LOGIN;
 	}
 	
 	public String getNutzertyp(String anmeldename) {

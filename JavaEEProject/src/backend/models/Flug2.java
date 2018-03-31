@@ -1,8 +1,8 @@
-package backend.enterpriseLogic;
+package backend.models;
 
 import java.util.List;
 
-public class Flug {
+public class Flug2 {
 	
 	String start;
 	public String getStart() {
@@ -50,7 +50,7 @@ public class Flug {
 	String name;
 	List<String> passagner;
 	
-	public Flug(String start,String goal,String food, String name, List<String> passagner)
+	public Flug2(String start,String goal,String food, String name, List<String> passagner)
 	{
 		this.start = start;
 		this.goal = goal;

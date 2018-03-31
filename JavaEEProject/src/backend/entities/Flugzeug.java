@@ -10,7 +10,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="flugzeug")
-@NamedQuery(name="Flugzeug.findAll", query="SELECT f FROM Flugzeug f")
+@NamedQueries({
+	@NamedQuery(name="Flugzeug.findAll", query="SELECT f FROM Flugzeug f"),
+	@NamedQuery(name="Flugzeug.findbyID", query="SELECT f FROM Flugzeug f WHERE f.flugzeugid = :id"),
+})
+
 public class Flugzeug implements Serializable {
 	private static final long serialVersionUID = 1L;
 
