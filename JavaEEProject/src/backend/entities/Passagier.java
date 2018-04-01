@@ -35,6 +35,15 @@ public class Passagier implements Serializable {
 	public Passagier() {
 	}
 
+	public Passagier(String vorname, String nachname, String anschrift, String geburtsdatum,
+			String nationalitaet) {
+		this.vorname = vorname;
+		this.nachname = nachname;
+		this.anschrift = anschrift;
+		this.geburtsdatum = geburtsdatum;
+		this.nationalitaet = nationalitaet;
+	}
+
 	public int getPassagierid() {
 		return this.passagierid;
 	}

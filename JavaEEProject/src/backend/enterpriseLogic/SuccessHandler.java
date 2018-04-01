@@ -1,6 +1,7 @@
 package backend.enterpriseLogic;
 
 public class SuccessHandler {
+	public static final String PASSAGIERANLAGE = "Erfolgreiche Anlage des Passagiers!";
 	public static String FLUGANLAGE = "Erfolgreiche Anlage des Flugs!";
 	public static String FLUGZEUGANLAGE = "Erfolgreiche Anlage des Flugzeugs!";
 	public static String FLUGZEUGZUORDNUNG = "Erfolgreiche Zuordnung des Flugzeugs!";
