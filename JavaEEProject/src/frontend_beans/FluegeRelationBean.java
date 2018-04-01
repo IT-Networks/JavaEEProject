@@ -91,7 +91,7 @@ public class FluegeRelationBean {
 	public void assignAirplainToRelation()
 	{
 		FlugzeugHandler fh = new FlugzeugHandler();
-		//fh.assignFlugzeugToFlug();
+		fh.assignFlugzeugToFlug(0, distance);
 	}
 
 	public String getStartLocation() {

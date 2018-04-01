@@ -37,26 +37,26 @@ public class FlugModel {
 		this.name = name;
 	}
 
-	public List<String> getPassagner() {
-		return passagner;
+	public List<String> getBuchungen() {
+		return buchungen;
 	}
 
-	public void setPassagner(List<String> passagner) {
-		this.passagner = passagner;
+	public void setBuchungen(List<String> buchungen) {
+		this.buchungen = buchungen;
 	}
 
 	String goal;
 	String food;
 	String name;
-	List<String> passagner;
+	List<String> buchungen;
 	
-	public FlugModel(String start,String goal,String food, String name, List<String> passagner)
+	public FlugModel(String start,String goal,String food, String name, List<String> buchungen)
 	{
 		this.start = start;
 		this.goal = goal;
 		this.food = food;
 		this.name = name;
-		this.passagner = passagner;
+		this.buchungen = buchungen;
 	}
 
 }
