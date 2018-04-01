@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "relation")
 @NamedQueries({ @NamedQuery(name = "Relation.findAll", query = "SELECT r FROM Relation r"),
-		@NamedQuery(name = "Relation.findRelations", query = "SELECT r FROM Relation r where r.startort = :start and r.zielort = :ziel or r.startort = :ziel and r.zielort = :start"),
+		@NamedQuery(name = "Relation.findRelations", query = "SELECT r FROM Relation r where r.startort = :start and r.zielort = :ziel"),
 		@NamedQuery(name = "Relation.findbyID", query = "SELECT r FROM Relation r where r.relationid = :id") })
 
 public class Relation implements Serializable {

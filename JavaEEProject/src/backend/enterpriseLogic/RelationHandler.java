@@ -28,7 +28,7 @@ public class RelationHandler extends DatabaseHandler {
 		Query query = em.createNamedQuery("Flughafen.findAll");
 		List<Flughafen> flughafenliste = new ArrayList<Flughafen>();
 		for (Object o : query.getResultList()) {
-			flughafenliste.add((Flughafen) o);
+			flughafenliste.add((Flughafen) o); 
 		}
 		String startid = "";
 		String zielid = "";
@@ -70,7 +70,7 @@ public class RelationHandler extends DatabaseHandler {
 			em.close();
 			return ErrorHandler.ZIELORTNICHTGEFUNDEN;
 		}
-		relation.setFlugzeit(Time.valueOf("15:00:00"));
+		relation.setFlugzeit(Time.valueOf(flugzeit));
 		relation.setDistanz(distanz);
 		em.persist(relation);
 		em.getTransaction().commit();

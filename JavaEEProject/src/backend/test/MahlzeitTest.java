@@ -31,7 +31,7 @@ public class MahlzeitTest {
 	}
 	@Test
 	public void testAssignMahlzeitToFlug() {
-		assertEquals(SuccessHandler.MAHLZEITZUORDNUNG, myBean.assignMahlzeitToFlug(2, "MH1/2"));
+		assertEquals(SuccessHandler.MAHLZEITZUORDNUNG, myBean.assignMahlzeitToFlug("1. Mahlzeit: Pizza Margarita (Teigwaren, vegetarisch: ja)", "MH1/6: Abflug: 2018-26-01 01:26, Ankunft: 2018-56-01 11:56 (Preis: 25.00 €)"));
 	}
 
 }

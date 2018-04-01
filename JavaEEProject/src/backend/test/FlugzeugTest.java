@@ -9,10 +9,11 @@ import org.junit.Test;
 
 import backend.enterpriseLogic.ErrorHandler;
 import backend.enterpriseLogic.FlugzeugHandler;
+import backend.enterpriseLogic.SuccessHandler;
 
 public class FlugzeugTest {
 	private FlugzeugHandler myBean = new FlugzeugHandler();
-	@Test
+
 	public void testCreateFlugzeug() {
 		String hersteller = null;
 		String typ = null;
@@ -33,7 +34,7 @@ public class FlugzeugTest {
 	
 	@Test
 	public void testAssignFlugToFlugzeug() {
-		assertEquals("", myBean.assignFlugzeugToFlug(2, "MH1/1"));
+		assertEquals(SuccessHandler.FLUGZEUGZUORDNUNG, myBean.assignFlugzeugToFlug("1. Flugzeug: Airbus A380-800 (853 Sitzplätze)", "MH1/6: Abflug: 2018-26-01 01:26, Ankunft: 2018-56-01 11:56 (Preis: 25.00 €)"));
 	}
 
 }

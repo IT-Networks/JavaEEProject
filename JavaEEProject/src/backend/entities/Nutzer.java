@@ -2,7 +2,6 @@ package backend.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * The persistent class for the nutzer database table.
@@ -29,8 +28,6 @@ public class Nutzer implements Serializable {
 	private String vorname;
 
 	// bi-directional many-to-one association to Buchung
-	@OneToMany(mappedBy = "nutzer")
-	private List<Buchung> buchungs;
 
 	public Nutzer() {
 	}
@@ -81,28 +78,6 @@ public class Nutzer implements Serializable {
 
 	public void setVorname(String vorname) {
 		this.vorname = vorname;
-	}
-
-	public List<Buchung> getBuchungs() {
-		return this.buchungs;
-	}
-
-	public void setBuchungs(List<Buchung> buchungs) {
-		this.buchungs = buchungs;
-	}
-
-	public Buchung addBuchung(Buchung buchung) {
-		getBuchungs().add(buchung);
-		buchung.setNutzer(this);
-
-		return buchung;
-	}
-
-	public Buchung removeBuchung(Buchung buchung) {
-		getBuchungs().remove(buchung);
-		buchung.setNutzer(null);
-
-		return buchung;
 	}
 
 }

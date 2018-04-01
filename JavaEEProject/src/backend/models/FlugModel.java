@@ -5,6 +5,10 @@ import java.util.List;
 public class FlugModel {
 	
 	String start;
+	String goal;
+	String food;
+	String name;
+	List<String> buchungen;
 	public String getStart() {
 		return start;
 	}
@@ -18,7 +22,7 @@ public class FlugModel {
 	}
 
 	public void setGoal(String goal) {
-		this.goal = goal;
+		this.goal = goal; 
 	}
 
 	public String getFood() {
@@ -44,11 +48,6 @@ public class FlugModel {
 	public void setBuchungen(List<String> buchungen) {
 		this.buchungen = buchungen;
 	}
-
-	String goal;
-	String food;
-	String name;
-	List<String> buchungen;
 	
 	public FlugModel(String start,String goal,String food, String name, List<String> buchungen)
 	{

@@ -2,16 +2,18 @@ package backend.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
-
 
 /**
  * The persistent class for the passagier database table.
  * 
  */
 @Entity
-@Table(name="passagier")
-@NamedQuery(name="Passagier.findAll", query="SELECT p FROM Passagier p")
+@Table(name = "passagier")
+@NamedQueries({
+	@NamedQuery(name = "Passagier.findAll", query = "SELECT p FROM Passagier p"),
+	@NamedQuery(name = "Passagier.findbyID", query = "SELECT p FROM Passagier p where p.passagierid= :id")
+})
+@NamedQuery(name = "Passagier.findAll", query = "SELECT p FROM Passagier p")
 public class Passagier implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,15 +30,10 @@ public class Passagier implements Serializable {
 
 	private String vorname;
 
-	//bi-directional many-to-one association to Buchung
-	@OneToMany(mappedBy="passagier")
-	private List<Buchung> buchungs;
-
 	public Passagier() {
 	}
 
-	public Passagier(String vorname, String nachname, String anschrift, String geburtsdatum,
-			String nationalitaet) {
+	public Passagier(String vorname, String nachname, String anschrift, String geburtsdatum, String nationalitaet) {
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.anschrift = anschrift;
@@ -90,28 +87,6 @@ public class Passagier implements Serializable {
 
 	public void setVorname(String vorname) {
 		this.vorname = vorname;
-	}
-
-	public List<Buchung> getBuchungs() {
-		return this.buchungs;
-	}
-
-	public void setBuchungs(List<Buchung> buchungs) {
-		this.buchungs = buchungs;
-	}
-
-	public Buchung addBuchung(Buchung buchung) {
-		getBuchungs().add(buchung);
-		buchung.setPassagier(this);
-
-		return buchung;
-	}
-
-	public Buchung removeBuchung(Buchung buchung) {
-		getBuchungs().remove(buchung);
-		buchung.setPassagier(null);
-
-		return buchung;
 	}
 
 }

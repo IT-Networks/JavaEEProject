@@ -63,9 +63,17 @@ public class FlugzeugHandler extends DatabaseHandler {
 		return flugzeugliste;
 	}
 
-	public String assignFlugzeugToFlug(int flugzeugid, String flugid) {
+	public String assignFlugzeugToFlug(String flugzeugString, String flugString) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
+		
+		String[] flugzeugArrayString = flugzeugString.split("\\.");
+		int flugzeugid = Integer.parseInt(flugzeugArrayString[0]);
+		flugzeugid+=1;
+		
+		String[] flugArrayString = flugString.split("\\:");
+		String flugid = flugArrayString[0];
+		
 		Query queryFlug = em.createNamedQuery("Flug.findbyID").setParameter("id", flugid);
 		List<Flug> flugliste = new ArrayList<Flug>();
 		for (Object o : queryFlug.getResultList()) {
@@ -77,7 +85,7 @@ public class FlugzeugHandler extends DatabaseHandler {
 		em.merge(flug);
 		em.getTransaction().commit();
 		em.close();
-		return SuccessHandler.FLUGZEUGANLAGE;
+		return SuccessHandler.FLUGZEUGZUORDNUNG;
 	}
 
 }

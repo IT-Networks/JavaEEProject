@@ -14,10 +14,10 @@ import backend.enterpriseLogic.SuccessHandler;
 public class PassagierTest {
 	private PassagierHandler myBean = new PassagierHandler();
 
-	public void testCreatePassagier() {
-		assertEquals(SuccessHandler.PASSAGIERANLAGE,
-				myBean.createPassagier("Halil", "Özdogan", "Am Stockhof 2, 31785 Hameln", "08.09.1995", "deutsch"));
-	}
+//	public void testCreatePassagier() {
+//		assertEquals(SuccessHandler.PASSAGIERANLAGE,
+//				myBean.createPassagier("Halil", "Özdogan", "Am Stockhof 2, 31785 Hameln", "08.09.1995", "deutsch"));
+//	}
 
 	@Test
 	public void testCreatePassagierNegative() {

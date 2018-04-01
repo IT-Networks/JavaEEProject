@@ -77,9 +77,17 @@ public class MahlzeitHandler extends DatabaseHandler {
 		return mahlzeitliste;
 	}
 	
-	public String assignMahlzeitToFlug(int mahlzeitid, String flugid) {
+	public String assignMahlzeitToFlug(String mahlzeitString, String flugString) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
+		
+		String[] mahlzeitArrayString = mahlzeitString.split("\\.");
+		int mahlzeitid = Integer.parseInt(mahlzeitArrayString[0]);
+		mahlzeitid+=1;
+		
+		String[] flugArrayString = flugString.split("\\:");
+		String flugid = flugArrayString[0];
+		
 		Query queryFlug = em.createNamedQuery("Flug.findbyID").setParameter("id", flugid);
 		List<Flug> flugliste = new ArrayList<Flug>();
 		for (Object o : queryFlug.getResultList()) {

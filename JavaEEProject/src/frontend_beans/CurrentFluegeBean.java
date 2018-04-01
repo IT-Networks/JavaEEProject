@@ -9,12 +9,13 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
+import backend.enterpriseLogic.FlugHandler;
 import backend.models.FlugModel;
 
 
 @ManagedBean
 @RequestScoped
-public class CurrentFluegeBean {
+public class CurrentFluegeBean { 
 
 	
 	@NotNull
@@ -39,14 +40,16 @@ public List<String> getAllPassagiere() {
 	}
 
 public List<FlugModel> getAllFluege() {
-	allFluege = new ArrayList<FlugModel>();
-	List<String> s = new ArrayList<String>();
-	s.add("Markus");
-	s.add("Halil");
-	FlugModel f = new FlugModel("Start Platz", "Ziel", "Pommes", "Flug 63",s);
-	FlugModel g = new FlugModel("Start Platz", "Ziel", "Pommes", "Flug 64",s);
-	allFluege.add(f);
-	allFluege.add(g);
+	FlugHandler fH = new FlugHandler();
+	this.allFluege = fH.getAllFlugModels();
+//	allFluege = new ArrayList<FlugModel>();
+//	List<String> s = new ArrayList<String>();
+//	s.add("Markus");
+//	s.add("Halil");
+//	FlugModel f = new FlugModel("Start Platz", "Ziel", "Pommes", "Flug 63",s);
+//	FlugModel g = new FlugModel("Start Platz", "Ziel", "Pommes", "Flug 64",s);
+//	allFluege.add(f);
+//	allFluege.add(g);
 	return allFluege;
 }
 

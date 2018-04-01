@@ -10,7 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="flughafen")
-@NamedQuery(name="Flughafen.findAll", query="SELECT f FROM Flughafen f")
+@NamedQueries({
+	@NamedQuery(name="Flughafen.findAll", query="SELECT f FROM Flughafen f"),
+	@NamedQuery(name="Flughafen.findStartUndZiel", query="SELECT f FROM Flughafen f WHERE f.flughafenid = :start OR f.flughafenid = :ziel")
+})
 public class Flughafen implements Serializable {
 	private static final long serialVersionUID = 1L;
 

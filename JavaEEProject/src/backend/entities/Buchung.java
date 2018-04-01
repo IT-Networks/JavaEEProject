@@ -11,6 +11,11 @@ import java.util.Date;
  */
 @Entity
 @Table(name="buchung")
+@NamedQueries({
+	@NamedQuery(name="Buchung.findAll", query="SELECT b FROM Buchung b"),
+	@NamedQuery(name="Buchung.findbyFlug", query="SELECT b FROM Buchung b WHERE b.flugid = :flugid"),
+	@NamedQuery(name="Buchung.findbyPassagier", query="SELECT b FROM Buchung b WHERE b.passagierid = :passagierid"),
+})
 @NamedQuery(name="Buchung.findAll", query="SELECT b FROM Buchung b")
 public class Buchung implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,27 +26,11 @@ public class Buchung implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date buchungsdatum;
 
-	//bi-directional many-to-one association to Flug
-	@ManyToOne
-	@JoinColumn(name="flugid")
-	private Flug flug;
+	private String flugid;
 
-	//bi-directional many-to-one association to Mahlzeit
-	@ManyToOne
-	@JoinColumn(name="gewaehlte_mahlzeitid")
-	private Mahlzeit mahlzeit;
+	private int passagierid;
 
-	//bi-directional many-to-one association to Nutzer
-	@ManyToOne
-	@JoinColumn(name="mitarbeiterid")
-	private Nutzer nutzer;
-
-	//bi-directional many-to-one association to Passagier
-	@ManyToOne
-	@JoinColumn(name="passagierid")
-	private Passagier passagier;
-
-	public Buchung() {
+	public Buchung() { 
 	}
 
 	public int getBuchungid() {
@@ -60,36 +49,20 @@ public class Buchung implements Serializable {
 		this.buchungsdatum = buchungsdatum;
 	}
 
-	public Flug getFlug() {
-		return this.flug;
+	public String getFlugid() {
+		return this.flugid;
 	}
 
-	public void setFlug(Flug flug) {
-		this.flug = flug;
+	public void setFlugid(String flugid) {
+		this.flugid = flugid;
 	}
 
-	public Mahlzeit getMahlzeit() {
-		return this.mahlzeit;
+	public int getPassagierid() {
+		return this.passagierid;
 	}
 
-	public void setMahlzeit(Mahlzeit mahlzeit) {
-		this.mahlzeit = mahlzeit;
-	}
-
-	public Nutzer getNutzer() {
-		return this.nutzer;
-	}
-
-	public void setNutzer(Nutzer nutzer) {
-		this.nutzer = nutzer;
-	}
-
-	public Passagier getPassagier() {
-		return this.passagier;
-	}
-
-	public void setPassagier(Passagier passagier) {
-		this.passagier = passagier;
+	public void setPassagierid(int passagierid) {
+		this.passagierid = passagierid;
 	}
 
 }

@@ -20,7 +20,7 @@ public class RelationTest {
 	public void testCreateRelation() throws NamingException {
 		String flugzeit = "10:30:00";
 		int distanz = 1500;
-		assertEquals(ErrorHandler.RELATIONSCHONVORHANDEN, myBean.createRelation("Flughafen Frankfurt am Main", "Chhatrapati Shivaji International Airport",flugzeit,distanz));
+		assertEquals(ErrorHandler.RELATIONSCHONVORHANDEN, myBean.createRelation("Madrid-Barajas", "Chhatrapati Shivaji International Airport",flugzeit,distanz));
 		assertEquals(ErrorHandler.RELATIONSCHONVORHANDEN, myBean.createRelation("Flughafen Frankfurt am Main", "Flughafen Paderborn/Lippstadt",flugzeit,distanz));
 		assertEquals(ErrorHandler.RELATIONSCHONVORHANDEN, myBean.createRelation("Flughafen Paderborn/Lippstadt", "Flughafen Frankfurt am Main",flugzeit,distanz));
 		assertEquals(ErrorHandler.STARTORTNICHTGEFUNDEN, myBean.createRelation("+++", "Flughafen Paderborn/Lippstadt",flugzeit,distanz));

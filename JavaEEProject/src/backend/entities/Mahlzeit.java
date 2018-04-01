@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Table(name="mahlzeit")
 @NamedQueries({
 	@NamedQuery(name="Mahlzeit.findAll", query="SELECT m FROM Mahlzeit m"),
-	@NamedQuery(name="Mahlzeit.findMahlzeit", query="SELECT m FROM Mahlzeit m WHERE m.name = :name AND m.art = :art AND m.vegetarisch = :vegetarisch")
+	@NamedQuery(name="Mahlzeit.findMahlzeit", query="SELECT m FROM Mahlzeit m WHERE m.name = :name AND m.art = :art AND m.vegetarisch = :vegetarisch"),
+	@NamedQuery(name="Mahlzeit.findbyID", query="SELECT m FROM Mahlzeit m WHERE m.mahlzeitid = :id")
 })
 
 public class Mahlzeit implements Serializable {
