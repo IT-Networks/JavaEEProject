@@ -19,8 +19,28 @@
 					<b:column medium-screen="4">
 						<b:selectOneMenu value="Bitte eine Flug auswählen"
 							id="fluegeDropDown">
-							<f:selectItems value="#{currentFluegeBean.allFluege}" var="flug" itemLabel="#{flug.name}"/>
+							<f:selectItems value="#{currentFluegeBean.allFluege}" var="flug"
+								itemLabel="#{flug.name}" />
 						</b:selectOneMenu>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Passagier" for="passagierDropDown" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:selectOneMenu value="Bitte einen Passagier auswählen"
+							id="passagierDropDown">
+							<f:selectItems value="#{currentFluegeBean.allPassagiere}" />
+						</b:selectOneMenu>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column span="2" offset="2">
+						<b:commandButton value="Anlegen"
+							onclick="currentFluegeBean.assignPassagier()"
+							look="primary" update="@form"
+							style="width:100%" />
 					</b:column>
 				</b:row>
 			</b:panel>

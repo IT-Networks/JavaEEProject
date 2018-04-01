@@ -9,7 +9,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
-import backend.models.Flug2;
+import backend.models.FlugModel;
 import backend.entities.Flug;
 import backend.entities.Relation;
 
@@ -90,7 +90,7 @@ public class FlugHandler extends DatabaseHandler {
 	 * not implemented
 	 * @return
 	 */
-	public List<Flug2> getAllFluege(){
+	public List<FlugModel> getAllFluege(){
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Query query = em.createNamedQuery("Flug.findAll");

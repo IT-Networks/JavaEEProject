@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import backend.enterpriseLogic.ErrorHandler;
 import backend.enterpriseLogic.NutzerHandler;
+import backend.enterpriseLogic.SuccessHandler;
 import frontend_controller.SessionUtils;
 
 @ManagedBean
@@ -48,7 +50,7 @@ public class LoginBean {
 		NutzerHandler nh = new NutzerHandler();
 		String result = nh.checkPasswort(username, password);
 		FacesMessage msg;
-		if (result.equals("Login erfolgreich.")) {
+		if (result.equals(SuccessHandler.LOGIN)) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
 					result);
 			HttpSession session = SessionUtils.getSession();
@@ -56,7 +58,7 @@ public class LoginBean {
 			session.setAttribute("profil", "Mitarbeiter");
 			session.setAttribute("role", nh.getNutzertyp(username));
 			FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
-		} else if(result.equals("Unter dem angebenen Nutzernamen konnte kein Nutzer gefunden werden!")){
+		} else if(result.equals(ErrorHandler.NUTZERNICHTGEFUNDEN)){
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
 					result);
 			FacesContext.getCurrentInstance().addMessage("loginForm:username", msg);

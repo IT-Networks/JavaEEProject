@@ -26,7 +26,8 @@ body {
 		<b:navbarLinks>
 			<b:navLink value="Home" href="index.xhtml"></b:navLink>
 			<b:navLink value="Aktuelle Flüge" href="currentFluege.xhtml"></b:navLink>
-			<b:navLink value="Login" href="login.xhtml" rendered="#{!userInfoBean.loggedIn}"></b:navLink>
+			<b:navLink value="Login" href="login.xhtml"
+				rendered="#{!userInfoBean.loggedIn}"></b:navLink>
 			<b:dropMenu value="Manager Features"
 				rendered="#{userInfoBean.userManager}">
 				<b:navLink value="Flüge und Relationen"
@@ -41,7 +42,8 @@ body {
 			</b:dropMenu>
 			<h:form>
 				<b:commandButton value="Ausloggen" onclick="ajax:loginBean.logout()"
-					update=":navigationBar" look="primary" rendered="#{userInfoBean.loggedIn}"/>
+					update=":navigationBar" look="primary"
+					rendered="#{userInfoBean.loggedIn}" />
 			</h:form>
 		</b:navbarLinks>
 	</b:navBar>

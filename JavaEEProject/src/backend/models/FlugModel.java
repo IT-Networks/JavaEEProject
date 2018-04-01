@@ -2,7 +2,7 @@ package backend.models;
 
 import java.util.List;
 
-public class Flug2 {
+public class FlugModel {
 	
 	String start;
 	public String getStart() {
@@ -50,7 +50,7 @@ public class Flug2 {
 	String name;
 	List<String> passagner;
 	
-	public Flug2(String start,String goal,String food, String name, List<String> passagner)
+	public FlugModel(String start,String goal,String food, String name, List<String> passagner)
 	{
 		this.start = start;
 		this.goal = goal;

@@ -11,14 +11,13 @@
 <h:body>
 	<h:form id="currentFlightsForm">
 		<b:container layout="fluid">
-		<b:panel title="Aktuelle Flüge" look="primary" collapsible="false">
-			<b:dataTable value="#{currentFluegeBean.allFluege}" var="flug">
-				<b:dataTableColumn value="#{flug.start}" />
-				<b:dataTableColumn value="#{flug.goal}" />
-				<b:dataTableColumn value="#{flug.name}" />
-				<b:dataTableColumn value="#{flug.food}" />
-				<b:dataTableColumn value="#{flug.passagner}" />
-			</b:dataTable>
+			<b:panel title="Aktuelle Flüge" look="primary" collapsible="false">
+				<b:dataTable value="#{currentFluegeBean.allFluege}" var="flug">
+					<b:dataTableColumn value="#{flug.start}" />
+					<b:dataTableColumn value="#{flug.goal}" />
+					<b:dataTableColumn value="#{flug.name}" />
+					<b:dataTableColumn value="#{flug.food}" />
+				</b:dataTable>
 			</b:panel>
 		</b:container>
 
