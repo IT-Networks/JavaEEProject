@@ -10,7 +10,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="mahlzeit")
-@NamedQuery(name="Mahlzeit.findAll", query="SELECT m FROM Mahlzeit m")
+@NamedQueries({
+	@NamedQuery(name="Mahlzeit.findAll", query="SELECT m FROM Mahlzeit m"),
+	@NamedQuery(name="Mahlzeit.findMahlzeit", query="SELECT m FROM Mahlzeit m WHERE m.name = :name AND m.art = :art AND m.vegetarisch = :vegetarisch")
+})
+
 public class Mahlzeit implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +28,11 @@ public class Mahlzeit implements Serializable {
 	private byte vegetarisch;
 
 	public Mahlzeit() {
+	}
+	public Mahlzeit(String name, String art, boolean vegetarisch) {
+		this.name = name;
+		this.art = art;
+		this.vegetarisch = (byte) (vegetarisch ? 1 : 0 );
 	}
 
 	public int getMahlzeitid() {
