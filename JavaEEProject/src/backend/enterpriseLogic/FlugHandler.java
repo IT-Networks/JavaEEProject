@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.ejb.LocalBean;
@@ -60,7 +61,7 @@ public class FlugHandler extends DatabaseHandler {
 		for (int i = 0; i < queryFlug.getResultList().size(); i++) {
 			flugnummer += 1;
 		}
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+		DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 		Date abflugszeit = dateFormat.parse(abflug);
 		Date ankunftszeit = calculateAnkunftszeit(abflugszeit, relation.getFlugzeit());
 		Flug flug = new Flug();
@@ -152,28 +153,28 @@ public class FlugHandler extends DatabaseHandler {
 	public String getFlugStatus(String aktuellString, String flugString) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
-		int randomNum = ThreadLocalRandom.current().nextInt(0, 10+ 1);
+		int randomNum = ThreadLocalRandom.current().nextInt(0, 10 + 1);
 		String[] arrayString = flugString.split("\\:");
 		String flugid = arrayString[0];
 		Query queryFlug = em.createNamedQuery("Flug.findbyID").setParameter("id", flugid);
 		Flug flug = (Flug) queryFlug.getResultList().get(0);
 		Date abflugszeit = flug.getAbflug();
 		Date aktuell = Date.from(Instant.parse(aktuellString));
-		if(randomNum==0) {
+		if (randomNum == 0) {
 			em.close();
 			return Status.CANCELED;
 		}
-		if(randomNum==1) {
+		if (randomNum == 1) {
 			em.close();
 			return Status.DELAYED;
 		}
-		if(abflugszeit.before(aktuell)) {
+		if (abflugszeit.before(aktuell)) {
 			em.close();
 			return Status.DEPARTURED;
 		}
-		if(abflugszeit.after(aktuell)) {
+		if (abflugszeit.after(aktuell)) {
 			Date grenze = DateUtils.addHours(aktuell, 6);
-			if(abflugszeit.before(grenze)) {
+			if (abflugszeit.before(grenze)) {
 				em.close();
 				return Status.LANDED;
 			}
