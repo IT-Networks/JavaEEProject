@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
 import backend.enterpriseLogic.FlugHandler;
+import backend.enterpriseLogic.PassagierHandler;
 import backend.models.FlugModel;
 
 
@@ -28,11 +29,9 @@ public class CurrentFluegeBean {
 	
 
 public List<String> getAllPassagiere() {
-	allPassagiere =  new ArrayList<String>();
-	allPassagiere.add("Halil");
-	allPassagiere.add("Markus");
-	
-		return allPassagiere;
+	PassagierHandler ph = new PassagierHandler();
+	return ph.getAllPassagiere();
+
 	}
 
 	public void setAllPassagiere(List<String> allPassagiere) {
@@ -42,14 +41,6 @@ public List<String> getAllPassagiere() {
 public List<FlugModel> getAllFluege() {
 	FlugHandler fH = new FlugHandler();
 	this.allFluege = fH.getAllFlugModels();
-//	allFluege = new ArrayList<FlugModel>();
-//	List<String> s = new ArrayList<String>();
-//	s.add("Markus");
-//	s.add("Halil");
-//	FlugModel f = new FlugModel("Start Platz", "Ziel", "Pommes", "Flug 63",s);
-//	FlugModel g = new FlugModel("Start Platz", "Ziel", "Pommes", "Flug 64",s);
-//	allFluege.add(f);
-//	allFluege.add(g);
 	return allFluege;
 }
 
