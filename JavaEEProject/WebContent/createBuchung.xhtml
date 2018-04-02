@@ -9,7 +9,7 @@
 	<ui:include src="/WEB-INF/header.xhtml" />
 </h:head>
 <h:body>
-	<h:form id="buchungForm">
+	<h:form id="buchungForm" rendered="#{userInfoBean.loggedIn}">
 		<b:container layout="fluid">
 			<b:panel title="Buchung anlegen" look="primary" collapsible="false">
 				<b:row>
@@ -17,10 +17,9 @@
 						<h:outputText value="Flug" for="fluegeDropDown" />
 					</b:column>
 					<b:column medium-screen="4">
-						<b:selectOneMenu value="Bitte eine Flug auswählen"
+						<b:selectOneMenu value="#{buchungBean.selectedFlight}"
 							id="fluegeDropDown">
-							<f:selectItems value="#{currentFluegeBean.allFluege}" var="flug"
-								itemLabel="#{flug.name}" />
+							<f:selectItems value="#{buchungBean.flights}"/>
 						</b:selectOneMenu>
 					</b:column>
 				</b:row>
@@ -29,17 +28,20 @@
 						<h:outputText value="Passagier" for="passagierDropDown" />
 					</b:column>
 					<b:column medium-screen="4">
-						<b:selectOneMenu value="Bitte einen Passagier auswählen"
+						<b:selectOneMenu value="#{buchungBean.selectedPassenger}"
 							id="passagierDropDown">
-							<f:selectItems value="#{currentFluegeBean.allPassagiere}" />
+							<f:selectItems value="#{buchungBean.passangers}" />
 						</b:selectOneMenu>
 					</b:column>
 				</b:row>
 				<b:row>
 					<b:column span="2" offset="2">
-						<b:commandButton value="Anlegen"
-							onclick="currentFluegeBean.assignPassagier()" look="primary"
+						<b:commandButton value="Anlegen" id="assignPassenger"
+							onclick="ajax:buchungBean.assignPassengerToFlight()" look="primary"
 							update="@form" style="width:100%" />
+					</b:column>
+						<b:column medium-screen="6" style-class="message">
+					<b:message for="assignPassenger" col-sm="6" />
 					</b:column>
 				</b:row>
 			</b:panel>

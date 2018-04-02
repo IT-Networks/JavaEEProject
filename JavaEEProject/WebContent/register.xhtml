@@ -11,7 +11,7 @@
 
 <h:body>
 
-	<h:form id="registerForm">
+	<h:form id="registerForm" rendered="#{!userInfoBean.loggedIn}">
 		<b:container layout="fluid">
 			<b:panel title="Registrierung" look="primary">
 				<b:row>
