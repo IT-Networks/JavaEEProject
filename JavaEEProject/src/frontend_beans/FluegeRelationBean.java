@@ -26,7 +26,7 @@ public class FluegeRelationBean {
 	@NotNull
 	@Max(23)
 	private String time;
-	
+
 	@NotNull
 	@Max(59)
 	private String minutes;
@@ -45,21 +45,20 @@ public class FluegeRelationBean {
 
 	@NotNull
 	private String fluglinieRelation;
-	
+
 	@NotNull
 	@Max(999)
 	private String price;
-	
+
 	@NotNull
 	private String airplain;
-	
 
 	@NotNull
 	private String flight;
-	
+
 	@NotNull
 	private List<String> flights;
-	
+
 	public String getPrice() {
 		return price;
 	}
@@ -134,7 +133,8 @@ public class FluegeRelationBean {
 			}
 		} else {
 			distance = distance.replaceAll("_", "");
-			String result = rh.createRelation(startLocation, goalLocation, time + ":" + minutes + ":00", Integer.parseInt(distance));
+			String result = rh.createRelation(startLocation, goalLocation, time + ":" + minutes + ":00",
+					Integer.parseInt(distance));
 
 			if (result.equals(SuccessHandler.RELATIONANLAGE)) {
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", result);
@@ -154,34 +154,32 @@ public class FluegeRelationBean {
 		try {
 			double d = Double.parseDouble(price);
 			result = fh.createFlug(startTime, fluglinieRelation, d);
-			
-			if(result.equals(SuccessHandler.FLUGANLAGE)) {
+
+			if (result.equals(SuccessHandler.FLUGANLAGE)) {
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", result);
 				FacesContext.getCurrentInstance().addMessage("flightForm:saveFluglinie", msg);
-			}
-			else {
+			} else {
 				msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", result);
 				FacesContext.getCurrentInstance().addMessage("flightForm:saveFluglinie", msg);
 			}
 
 		} catch (ParseException e) {
-		
+
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", result);
 			FacesContext.getCurrentInstance().addMessage("flightForm:saveFluglinie", msg);
 		}
 
 	}
-	
+
 	public void assignAirplainToRelation() {
 		FlugzeugHandler fh = new FlugzeugHandler();
 		String result = fh.assignFlugzeugToFlug(airplain, flight);
 		FacesMessage msg;
-		
-		if(result.equals(SuccessHandler.FLUGZEUGZUORDNUNG)) {
+
+		if (result.equals(SuccessHandler.FLUGZEUGZUORDNUNG)) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", result);
 			FacesContext.getCurrentInstance().addMessage("plainForm:saveFlugToAirplain", msg);
-		}
-		else {
+		} else {
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", result);
 			FacesContext.getCurrentInstance().addMessage("plainForm:saveFlugToAirplain", msg);
 		}
@@ -212,6 +210,7 @@ public class FluegeRelationBean {
 	public void setAirplains(List<String> airplains) {
 		this.airplains = airplains;
 	}
+
 	public String getMinutes() {
 		return minutes;
 	}
@@ -219,7 +218,7 @@ public class FluegeRelationBean {
 	public void setMinutes(String minutes) {
 		this.minutes = minutes;
 	}
-	
+
 	public String getFluglinieRelation() {
 		return fluglinieRelation;
 	}

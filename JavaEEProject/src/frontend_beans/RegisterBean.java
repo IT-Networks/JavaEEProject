@@ -22,49 +22,48 @@ import backend.enterpriseLogic.NutzerHandler;
 @RequestScoped
 public class RegisterBean {
 
-	@Size(min=4, max=10)
-  @NotEmpty
-  private String username;
- 
-  @Size(min=4, max=20)
-  @NotEmpty
-  private String password;
-  
-  @NotEmpty
-  private String profilTyp;
-  
-  @NotEmpty
-  private String name;
-  
-  public void setName(String name) {
-	this.name = name;
-}
+	@Size(min = 4, max = 10)
+	@NotEmpty
+	private String username;
 
-public void setLastname(String lastname) {
-	this.lastname = lastname;
-}
+	@Size(min = 4, max = 20)
+	@NotEmpty
+	private String password;
 
-@NotEmpty
-  private String lastname;
- 
- 
-  public String getProfilTyp() {
-	return profilTyp;
-}
+	@NotEmpty
+	private String profilTyp;
 
-public void setProfilTyp(String profilTyp) {
-	this.profilTyp = profilTyp;
-}
+	@NotEmpty
+	private String name;
 
-public void setUsername(String name) {
-    this.username = name;
-  }
- 
-  public void setPassword(String password) {
-    this.password = password;
-  }
-  
-  public String getUsername() {
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	@NotEmpty
+	private String lastname;
+
+	public String getProfilTyp() {
+		return profilTyp;
+	}
+
+	public void setProfilTyp(String profilTyp) {
+		this.profilTyp = profilTyp;
+	}
+
+	public void setUsername(String name) {
+		this.username = name;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
 		return username;
 	}
 
@@ -79,13 +78,12 @@ public void setUsername(String name) {
 	public String getLastname() {
 		return lastname;
 	}
-	
 
-	public void register() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+	public void register() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException,
+			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		NutzerHandler nh = new NutzerHandler();
 		String output = nh.createNutzer(name, lastname, username, password, profilTyp);
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
-				output);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", output);
 		FacesContext.getCurrentInstance().addMessage("registerForm:name", msg);
 	}
 }

@@ -16,35 +16,33 @@ import backend.enterpriseLogic.MahlzeitHandler;
 import backend.enterpriseLogic.PassagierHandler;
 import backend.enterpriseLogic.SuccessHandler;
 
-
 @ManagedBean
 @RequestScoped
-public class AuslastungBean { 
+public class AuslastungBean {
 
 	@NotNull
 	private String result = "";
 	@NotNull
 	private String selectedFlight;
-	
-	
+
 	public String getResult() {
 		return result;
 	}
+
 	public void setResult(String result) {
 		this.result = result;
 	}
+
 	public String getSelectedFlight() {
 		return selectedFlight;
 	}
+
 	public void setSelectedFlight(String selectedFlight) {
-		
+
 		BuchungHandler bh = new BuchungHandler();
 		result = bh.calculateCapacity(selectedFlight);
-		
+
 		this.selectedFlight = selectedFlight;
 	}
 
-	
-
-	
 }

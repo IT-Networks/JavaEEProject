@@ -40,6 +40,7 @@ body {
 				<b:navLink value="Passagiere anlegen" href="createPassagier.xhtml"></b:navLink>
 				<b:navLink value="Mahlzeiten anlegen und zuordnen" href="createMahlzeit.xhtml"></b:navLink>
 			</b:dropMenu>
+			<b:navLink value="Registrieren" href="register.xhtml" rendered="#{!userInfoBean.loggedIn}"></b:navLink>
 			<h:form>
 				<b:commandButton value="Ausloggen" onclick="ajax:loginBean.logout()"
 					update=":navigationBar" look="primary"

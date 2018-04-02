@@ -9,18 +9,41 @@
 	<ui:include src="/WEB-INF/header.xhtml" />
 </h:head>
 <h:body>
-	<h:form id="currentFlightsForm">
+	<h:form id="currentFlightsForm" rendered="#{userInfoBean.loggedIn}">
 		<b:container layout="fluid">
-			<b:panel title="Aktuelle Flüge" look="primary" collapsible="false">
-				<b:dataTable value="#{currentFluegeBean.allFluege}" var="flug">
-					<b:dataTableColumn value="#{flug.start}" />
-					<b:dataTableColumn value="#{flug.goal}" />
-					<b:dataTableColumn value="#{flug.name}" />
-					<b:dataTableColumn value="#{flug.food}" />
-				</b:dataTable>
-			</b:panel>
-		</b:container>
+		<b:tabView pills="true"
+			contentStyle="border: 1px solid #ddd;padding:10px">
+			<b:tab title="Aktuelle Flüge">
+				
+					<b:panel title="Flüge" look="primary" collapsible="false">
+						<b:dataTable value="#{currentFluegeBean.allFluege}" var="flug"
+							select="true" selectionMode="single"
+							onselect="ajax:currentFluegeBean.onSelect(flug);" update="@next">
+							<b:dataTableColumn value="#{flug.start}" />
+							<b:dataTableColumn value="#{flug.goal}" />
+							<b:dataTableColumn value="#{flug.name}" />
+							<b:dataTableColumn value="#{flug.food}" />
+						</b:dataTable>
+					</b:panel>
 
+					<b:panel title="Buchungen" look="primary"
+						collapsible="false">
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputText value="Flug" for="fluegeDropDown" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputTextarea  value="#{currentFluegeBean.buchungen}">
+									
+								</b:inputTextarea>
+							</b:column>
+						</b:row>
+
+					</b:panel>
+				
+			</b:tab>
+		</b:tabView>
+		</b:container>
 	</h:form>
 
 </h:body>
