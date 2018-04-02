@@ -79,6 +79,17 @@ public class FlugzeugHandler extends DatabaseHandler {
 		for (Object o : queryFlug.getResultList()) {
 			flugliste.add((Flug) o);
 		}
+		for(Flug flug : flugliste) {
+			if(flug.getFlugzeugid()==flugzeugid&&!flug.getFlugid().equals(flugid)) {
+				em.close();
+				return ErrorHandler.FLUGZEUGBEREITSZUGEORDNET;
+			}
+			if(flug.getFlugzeugid()==flugzeugid&&flug.getFlugid().equals(flugid)) {
+				em.close();
+				return ErrorHandler.FLUGZEUGDIESEMFLUGZUGEORDNET;
+			}
+		}
+		
 		Flug flug = new Flug();
 		flug = flugliste.get(0);
 		flug.setFlugzeugid(flugzeugid);

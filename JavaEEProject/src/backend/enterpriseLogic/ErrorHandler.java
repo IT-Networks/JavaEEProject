@@ -12,4 +12,7 @@ public final class ErrorHandler {
 	public static final String NUTZERPASSWORTFALSCH = "Bitte geben Sie das richtige Passwort an!";
 	public static final String NUTZERTYPNICHTVORHANDEN = "Dieser Nutzertyp ist nicht vorhanden!";
 	public static final String FLUGZEUGNICHTZUGEORDNET = "Dieser Flug hat noch kein zugeordnetes Flugzeug!";
+	public static final String FLUGZEUGBEREITSZUGEORDNET = "Dieses Flugzeug wurde bereits einem Flug zugeordnet.";
+	public static final String FLUGZEUGDIESEMFLUGZUGEORDNET = "Dieser Flugzeug wurde bereits diesem Flug zugeordnet.";
+	public static final String STATUSNICHTSETZBAR = "Der Status kann nicht gesetzt werden.";
 }

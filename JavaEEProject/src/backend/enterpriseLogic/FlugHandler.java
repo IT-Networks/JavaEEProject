@@ -5,9 +5,11 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -120,28 +122,66 @@ public class FlugHandler extends DatabaseHandler {
 		}
 		return flugliste;
 	}
- 
-	public List<FlugModel> getAllFlugModels(){
+
+	public List<FlugModel> getAllFlugModels() {
 		List<FlugModel> flugModelListe = new ArrayList<FlugModel>();
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Query queryFlug = em.createNamedQuery("Flug.findAll");
 		List<Flug> fluglisteDB = new ArrayList<Flug>();
-		for(Object o : queryFlug.getResultList()) {
+		for (Object o : queryFlug.getResultList()) {
 			fluglisteDB.add((Flug) o);
 		}
-		for(Flug flug : fluglisteDB) {
-			Query queryRelation = em.createNamedQuery("Relation.findbyID").setParameter("id", flug.getRelation().getRelationid());
+		for (Flug flug : fluglisteDB) {
+			Query queryRelation = em.createNamedQuery("Relation.findbyID").setParameter("id",
+					flug.getRelation().getRelationid());
 			Relation relation = (Relation) queryRelation.getResultList().get(0);
-			Query queryFlughafen = em.createNamedQuery("Flughafen.findStartUndZiel").setParameter("start", relation.getStartort()).setParameter("ziel", relation.getZielort());
+			Query queryFlughafen = em.createNamedQuery("Flughafen.findStartUndZiel")
+					.setParameter("start", relation.getStartort()).setParameter("ziel", relation.getZielort());
 			Flughafen startFlughafen = (Flughafen) queryFlughafen.getResultList().get(0);
 			Flughafen zielFlughafen = (Flughafen) queryFlughafen.getResultList().get(1);
 			Query queryMahlzeit = em.createNamedQuery("Mahlzeit.findbyID").setParameter("id", flug.getMahlzeitid());
 			Mahlzeit mahlzeit = (Mahlzeit) queryMahlzeit.getResultList().get(0);
 			BuchungHandler bH = new BuchungHandler();
-			flugModelListe.add(new FlugModel(startFlughafen.getName(), zielFlughafen.getName(), mahlzeit.getName(), flug.getFlugid(), bH.getBuchungenbyFlug(flug.getFlugid()+":")));
+			flugModelListe.add(new FlugModel(startFlughafen.getName(), zielFlughafen.getName(), mahlzeit.getName(),
+					flug.getFlugid(), bH.getBuchungenbyFlug(flug.getFlugid() + ":")));
 		}
 		return flugModelListe;
+	}
+
+	public String getFlugStatus(String aktuellString, String flugString) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		int randomNum = ThreadLocalRandom.current().nextInt(0, 10+ 1);
+		String[] arrayString = flugString.split("\\:");
+		String flugid = arrayString[0];
+		Query queryFlug = em.createNamedQuery("Flug.findbyID").setParameter("id", flugid);
+		Flug flug = (Flug) queryFlug.getResultList().get(0);
+		Date abflugszeit = flug.getAbflug();
+		Date aktuell = Date.from(Instant.parse(aktuellString));
+		if(randomNum==0) {
+			em.close();
+			return Status.CANCELED;
+		}
+		if(randomNum==1) {
+			em.close();
+			return Status.DELAYED;
+		}
+		if(abflugszeit.before(aktuell)) {
+			em.close();
+			return Status.DEPARTURED;
+		}
+		if(abflugszeit.after(aktuell)) {
+			Date grenze = DateUtils.addHours(aktuell, 6);
+			if(abflugszeit.before(grenze)) {
+				em.close();
+				return Status.LANDED;
+			}
+			em.close();
+			return Status.SCHEDULED;
+		}
+		em.close();
+		return ErrorHandler.STATUSNICHTSETZBAR;
 	}
 
 	private Date calculateAnkunftszeit(Date abflugszeit, Time flugzeit) {
@@ -152,6 +192,14 @@ public class FlugHandler extends DatabaseHandler {
 		ankunftszeit = DateUtils.addHours(abflugszeit, hours);
 		ankunftszeit = DateUtils.addMinutes(ankunftszeit, minuts);
 		return ankunftszeit;
+	}
+
+	private final class Status {
+		public static final String DEPARTURED = "departured";
+		public static final String SCHEDULED = "scheduled";
+		public static final String LANDED = "landed";
+		public static final String DELAYED = "delayed";
+		public static final String CANCELED = "canceled";
 	}
 
 }
