@@ -125,7 +125,7 @@ public class BuchungHandler extends DatabaseHandler {
 		}
 		int frei = flugzeug.getSitzplaetze();
 		frei = frei - buchungsanzahl;
-		return "Es sind noch " + frei + " Plaetze von "+ flugzeug.getSitzplaetze() + " Plaetzen frei." ;
+		return frei + " von "+ flugzeug.getSitzplaetze() + " Plaetzen noch frei." ;
 		
 	}
 }
