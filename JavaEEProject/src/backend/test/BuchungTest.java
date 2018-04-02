@@ -14,14 +14,12 @@ import backend.enterpriseLogic.SuccessHandler;
 public class BuchungTest {
 	private BuchungHandler myBean = new BuchungHandler();
 
-	// @Test
-	// public void testCreateBuchung() {
-	// assertEquals(SuccessHandler.BUCHUNGANLAGE, myBean.createBuchung(
-	// "1. Passagier: Halil Özdogan (Anschrift: Am Stockhof 2, 31785 Hameln,
-	// Geburtsdatum: 08.09.1995, Nationalitaet: deutsch)",
-	// "MH1/4: Abflug: 2018-14-01 23:14, Ankunft: 2018-14-01 23:14 (Preis: 25.00
-	// €)"));
-	// }
+//	@Test
+//	 public void testCreateBuchung() {
+//	 assertEquals(SuccessHandler.BUCHUNGANLAGE, myBean.createBuchung(
+//	 "1. Passagier: Halil Özdogan (Anschrift: Am Stockhof 2, 31785 Hameln, Geburtsdatum: 08.09.1995, Nationalitaet: deutsch)",
+//	 "MH1/4: Abflug: 2018-14-01 23:14, Ankunft: 2018-14-01 23:14 (Preis: 25.00€)"));
+//	 }
 
 	@Test
 	public void testCreateBuchungNegative() {
@@ -32,20 +30,29 @@ public class BuchungTest {
 				""));
 		assertEquals(ErrorHandler.DATENUNVOLLSTAENDIG, myBean.createBuchung("", ""));
 	}
-	
+
+	@Test
+	public void testCalculateCapacity() {
+		System.out.println(myBean
+				.calculateCapacity("MH1/4: Abflug: 2018-14-01 23:14, Ankunft: 2018-14-01 23:14 (Preis: 25.00 €)"));
+	}
+
 	@Test
 	public void testGetBuchungbyFlug() {
 		List<String> buchungsliste = new ArrayList<String>();
-		buchungsliste = myBean.getBuchungenbyFlug("MH1/4: Abflug: 2018-14-01 23:14, Ankunft: 2018-14-01 23:14 (Preis: 25.00 €)");
-		for(String str : buchungsliste) {
+		buchungsliste = myBean
+				.getBuchungenbyFlug("MH1/4: Abflug: 2018-14-01 23:14, Ankunft: 2018-14-01 23:14 (Preis: 25.00 €)");
+		for (String str : buchungsliste) {
 			System.out.println(str);
 		}
 	}
+
 	@Test
 	public void testGetBuchungbyPassagier() {
 		List<String> buchungsliste = new ArrayList<String>();
-		buchungsliste = myBean.getBuchungenbyPassagier("1. Passagier: Halil Özdogan (Anschrift: Am Stockhof 2, 31785 Hameln, Geburtsdatum: 08.09.1995, Nationalitaet: deutsch)");
-		for(String str : buchungsliste) {
+		buchungsliste = myBean.getBuchungenbyPassagier(
+				"1. Passagier: Halil Özdogan (Anschrift: Am Stockhof 2, 31785 Hameln, Geburtsdatum: 08.09.1995, Nationalitaet: deutsch)");
+		for (String str : buchungsliste) {
 			System.out.println(str);
 		}
 	}

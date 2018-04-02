@@ -39,8 +39,6 @@ public class FlugHandler extends DatabaseHandler {
 	public String createFlug(String abflug, String relationString, double preis) throws ParseException {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 		String[] arrayString = relationString.split("\\.");
 		int relationid = Integer.parseInt(arrayString[0]);
 
@@ -122,7 +120,7 @@ public class FlugHandler extends DatabaseHandler {
 		}
 		return flugliste;
 	}
-
+ 
 	public List<FlugModel> getAllFlugModels(){
 		List<FlugModel> flugModelListe = new ArrayList<FlugModel>();
 		em = emf.createEntityManager();

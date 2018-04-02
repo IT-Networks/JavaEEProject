@@ -9,6 +9,8 @@ import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 import backend.entities.Buchung;
+import backend.entities.Flug;
+import backend.entities.Flugzeug;
 import backend.entities.Passagier;
 
 /**
@@ -104,5 +106,26 @@ public class BuchungHandler extends DatabaseHandler {
 
 		return buchungsliste;
 	}
-
+	public String calculateCapacity(String flugString) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		int buchungsanzahl = 0;
+		String[] arrayString = flugString.split("\\:");
+		String flugid = arrayString[0];
+		Query query = em.createNamedQuery("Flug.findbyID").setParameter("id", flugid);
+		Flug flug = (Flug) query.getResultList().get(0);
+		Query queryFlugzeug = em.createNamedQuery("Flugzeug.findbyID").setParameter("id", flug.getFlugzeugid());
+		Flugzeug flugzeug = (Flugzeug) queryFlugzeug.getResultList().get(0);
+		List<String> buchungsliste = getBuchungenbyFlug(flugid+":");
+		for(int i = 0;i<buchungsliste.size();i++) {
+			buchungsanzahl++;
+		}
+		if(flugzeug.getSitzplaetze()==0) {
+			return ErrorHandler.FLUGZEUGNICHTZUGEORDNET;
+		}
+		int frei = flugzeug.getSitzplaetze();
+		frei = frei - buchungsanzahl;
+		return "Es sind noch " + frei + " Plaetze von "+ flugzeug.getSitzplaetze() + " Plaetzen frei." ;
+		
+	}
 }

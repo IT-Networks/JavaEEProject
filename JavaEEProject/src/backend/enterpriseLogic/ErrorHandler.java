@@ -11,4 +11,5 @@ public final class ErrorHandler {
 	public static final String NUTZERNICHTGEFUNDEN = "Unter dem angebenen Nutzernamen konnte kein Nutzer gefunden werden!";
 	public static final String NUTZERPASSWORTFALSCH = "Bitte geben Sie das richtige Passwort an!";
 	public static final String NUTZERTYPNICHTVORHANDEN = "Dieser Nutzertyp ist nicht vorhanden!";
+	public static final String FLUGZEUGNICHTZUGEORDNET = "Dieser Flug hat noch kein zugeordnetes Flugzeug!";
 }
