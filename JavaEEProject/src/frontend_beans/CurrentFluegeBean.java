@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
 import backend.enterpriseLogic.FlugHandler;
+import backend.enterpriseLogic.ModelHandler;
 import backend.enterpriseLogic.PassagierHandler;
 import backend.models.FlugModel;
 
@@ -39,8 +40,8 @@ public List<String> getAllPassagiere() {
 	}
 
 public List<FlugModel> getAllFluege() {
-	FlugHandler fH = new FlugHandler();
-	this.allFluege = fH.getAllFlugModels();
+	ModelHandler mH = new ModelHandler();
+	this.allFluege = mH.getAllFlugModels();
 	return allFluege;
 }
 

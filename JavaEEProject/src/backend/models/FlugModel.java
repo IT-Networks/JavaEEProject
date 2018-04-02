@@ -4,11 +4,11 @@ import java.util.List;
 
 public class FlugModel {
 	
-	String start;
-	String goal;
-	String food;
-	String name;
-	List<String> buchungen;
+	private String start;
+	private String goal;
+	private String food;
+	private String name;
+	private List<String> buchungen;
 	public String getStart() {
 		return start;
 	}

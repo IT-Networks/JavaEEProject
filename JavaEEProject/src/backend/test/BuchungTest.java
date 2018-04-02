@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import backend.enterpriseLogic.BuchungHandler;
 import backend.enterpriseLogic.ErrorHandler;
-import backend.enterpriseLogic.SuccessHandler;
 
 public class BuchungTest {
 	private BuchungHandler myBean = new BuchungHandler();
