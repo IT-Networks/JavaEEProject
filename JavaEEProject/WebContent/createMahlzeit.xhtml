@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<ui:include src="/WEB-INF/header.xhtml" />
+</h:head>
+
+
+<h:body>
+
+	<h:form id="foodForm" rendered="#{userInfoBean.loggedIn}">
+		<b:container layout="fluid" id="container">
+			<b:panel title="Mahlzeit anlegen" look="primary">
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Name" for="name" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:inputText placeholder="Lasagne" id="name"
+							value="#{foodBean.name}" ajax="true" 
+							autocomplete="false" update="@(.message)">
+							<f:facet name="prepend">
+								<b:icon name="pencil" />
+							</f:facet>
+						</b:inputText>
+						</b:column>
+						<b:column medium-screen="6" style-class="message">
+						<b:message for="name" col-sm="6" />
+						</b:column>					
+				</b:row>
+								<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Art" for="kind" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:inputText placeholder="Deftiges" id="kind"
+							value="#{foodBean.kind}" ajax="true" 
+							autocomplete="false" update="@(.message)">
+							<f:facet name="prepend">
+								<b:icon name="pencil" />
+							</f:facet>
+						</b:inputText>
+						</b:column>
+						<b:column medium-screen="6" style-class="message">
+						<b:message for="kind" col-sm="6" />
+						</b:column>					
+				</b:row>
+								<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Vegetarisch" for="vegetarian" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:selectBooleanCheckbox value="#{foodBean.vegetarian}"  id="vegetarian"/>
+						</b:column>
+						<b:column medium-screen="6" style-class="message">
+						<b:message for="vegetarian" col-sm="6" />
+						</b:column>					
+				</b:row>
+				
+					<b:row>
+				<b:column span="2" offset="2">
+						<b:commandButton value="Speichern" id="saveFood"
+							onclick="ajax:foodBean.createMahlzeit()"
+							update=":foodForm :assignfoodForm" look="primary" style="width:100%" />
+					</b:column>
+					<b:column medium-screen="6" style-class="message">
+					<b:message for="saveFood" col-sm="6" />
+					</b:column>
+				</b:row>
+			</b:panel>
+		</b:container>
+	</h:form>
+
+	<h:form id="assignfoodForm" rendered="#{userInfoBean.loggedIn}">
+		<b:container layout="fluid" id="container">
+			<b:panel title="Mahlzeit zuordnen" look="primary">
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Mahlzeit" for="food" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:selectOneMenu value="#{foodBean.selectedFood}"
+							id="food">
+							<f:selectItems value="#{foodBean.allFood}" />
+						</b:selectOneMenu>
+					</b:column>
+					<b:column medium-screen="6" style-class="message">
+						<b:message for="food" col-sm="6" />
+					</b:column>
+				</b:row>				
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Flug" for="flugDropDown" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:selectOneMenu value="#{foodBean.flight}"
+							id="flugDropDown">
+							<f:selectItems value="#{foodBean.flights}" />
+						</b:selectOneMenu>
+					</b:column>
+				</b:row>
+					<b:row>
+				<b:column span="2" offset="2">
+						<b:commandButton value="Speichern" id="assignFood"
+							onclick="ajax:foodBean.assignMahlzeit()"
+							update="@form" look="primary" style="width:100%" />
+					</b:column>
+					<b:column medium-screen="6" style-class="message">
+					<b:message for="assignFood" col-sm="6" />
+					</b:column>
+				</b:row>
+			</b:panel>
+		</b:container>
+	</h:form>
+</h:body>
+
+</html>

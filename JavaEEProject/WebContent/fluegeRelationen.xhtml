@@ -96,7 +96,7 @@
 				<b:row>
 					<b:column span="2" offset="2">
 						<b:commandButton value="Speichern" id="saveRelation"
-							onclick="ajax:fluegeRelationBean.setRelation()" update="@form"
+							onclick="ajax:fluegeRelationBean.setRelation()" update=":relationForm :flightForm"
 							look="primary" style="width:100%" />						
 					</b:column>
 					<b:column medium-screen="6" style-class="message">
@@ -154,7 +154,7 @@
 					<b:column span="2" offset="2">
 						<b:commandButton value="Speichern" id="saveFluglinie"
 							onclick="ajax:fluegeRelationBean.createFluglinie()"
-							update="@form" look="primary" style="width:100%" />
+							update=":flightForm :plainForm" look="primary" style="width:100%" />
 					</b:column>
 					<b:column medium-screen="6" style-class="message">
 					<b:message for="saveFluglinie" col-sm="6" />

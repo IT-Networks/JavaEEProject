@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<ui:include src="/WEB-INF/header.xhtml" />
+</h:head>
+
+<h:body>
+
+	<h:form id="passengerForm" rendered="#{userInfoBean.loggedIn}">
+		<b:container layout="fluid" id="container">
+			<b:panel title="Passagier anlegen" look="primary">
+				<b:row>
+					<b:column medium-screen="2">
+						<h:outputText value="Vorname" for="name" />
+					</b:column>
+					<b:column medium-screen="4">
+						<b:inputText placeholder="Max" id="name" value="#{passengerBean.name}" ajax="true"
+							autocomplete="false" update="@(.message)">
+							<f:facet name="prepend">
+								<b:icon name="pencil" />
+							</f:facet>
+						</b:inputText>
+					</b:column>
+					<b:column medium-screen="6" style-class="message">
+						<b:message for="name" col-sm="6" />
+					</b:column>
+				</b:row>
+				<b:row>
+				<b:column medium-screen="2">
+					<h:outputText value="Nachname" for="lastname" />
+				</b:column>
+				<b:column medium-screen="4">
+					<b:inputText placeholder="Mustermann" id="lastname" value="#{passengerBean.lastname}"
+						ajax="true" autocomplete="false" update="@(.message)">
+						<f:facet name="prepend">
+							<b:icon name="pencil" />
+						</f:facet>
+					</b:inputText>
+				</b:column>
+				<b:column medium-screen="6" style-class="message">
+					<b:message for="lastname" col-sm="6" />
+				</b:column>
+				</b:row>
+				<b:row>
+				<b:column medium-screen="2">
+					<h:outputText value="Anschrift" for="location" />
+				</b:column>
+				<b:column medium-screen="4">
+					<b:inputText placeholder="Am Stockhof 2, 31785 Hameln"
+						id="location" value="#{passengerBean.location}" ajax="true" autocomplete="false"
+						update="@(.message)">
+						<f:facet name="prepend">
+							<b:icon name="pencil" />
+						</f:facet>
+					</b:inputText>
+				</b:column>
+				<b:column medium-screen="6" style-class="message">
+					<b:message for="location" col-sm="6" />
+				</b:column>
+				</b:row>
+				<b:row>
+				<b:column medium-screen="2">
+					<h:outputText value="Geburtsdatum" for="birthday" />
+				</b:column>
+				<b:column medium-screen="4">
+					<b:dateTimePicker value="#{passengerBean.birthdy}" format="MM/DD/YYYY" id="birthday" />
+				</b:column>
+				<b:column medium-screen="6" style-class="message">
+					<b:message for="birthday" col-sm="6" />
+				</b:column>
+				</b:row>
+				<b:row>
+				<b:column medium-screen="2">
+					<h:outputText value="Nationalität" for="nationality" />
+				</b:column>
+				<b:column medium-screen="4">
+					<b:inputText placeholder="deutsch" id="nationality" value="#{passengerBean.nationality}"
+						ajax="true" autocomplete="false" update="@(.message)">
+						<f:facet name="prepend">
+							<b:icon name="pencil" />
+						</f:facet>
+					</b:inputText>
+				</b:column>
+				<b:column medium-screen="6" style-class="message">
+					<b:message for="nationality" col-sm="6" />
+				</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column span="2" offset="2">
+						<b:commandButton value="Speichern" id="creatPessenger"
+							onclick="ajax:passengerBean.creatPessenger()" update="@form" look="primary" style="width:100%" />
+					</b:column>
+					<b:column medium-screen="6" style-class="message">
+						<b:message for="creatPessenger" col-sm="6" />
+					</b:column>
+				</b:row>
+			</b:panel>
+		</b:container>
+	</h:form>
+
+</h:body>
+</html>
