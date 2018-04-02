@@ -1,7 +1,12 @@
 package backend.enterpriseLogic;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -25,7 +30,7 @@ public class PassagierHandler extends DatabaseHandler {
 	}
 
 	public String createPassagier(String vorname, String nachname, String anschrift, String geburtsdatum,
-			String nationalitaet) {
+			String nationalitaet) throws ParseException {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		if (vorname == null || nachname == null || anschrift == null || geburtsdatum == null || nationalitaet == null
@@ -34,7 +39,11 @@ public class PassagierHandler extends DatabaseHandler {
 			em.close();
 			return ErrorHandler.DATENUNVOLLSTAENDIG;
 		}
-		Passagier passagier = new Passagier(vorname, nachname, anschrift, geburtsdatum, nationalitaet);
+		DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+		Date geburtsdate = dateFormat.parse(geburtsdatum);
+		DateFormat rightFormat = new SimpleDateFormat("dd.MM.YYYY");
+		String bday = rightFormat.format(geburtsdate);
+		Passagier passagier = new Passagier(vorname, nachname, anschrift, bday, nationalitaet);
 		em.persist(passagier);
 		em.getTransaction().commit();
 

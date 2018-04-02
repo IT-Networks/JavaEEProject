@@ -1,5 +1,6 @@
 package frontend_beans;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -103,7 +104,7 @@ public class PassengerBean {
 
 
 
-	public void creatPessenger(){
+	public void creatPessenger() throws ParseException{
 		FacesMessage msg;
 		PassagierHandler ph = new PassagierHandler();
 		String result = ph.createPassagier(name, lastname, location, birthdy, nationality);

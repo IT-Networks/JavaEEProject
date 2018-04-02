@@ -14,12 +14,12 @@ import backend.enterpriseLogic.SuccessHandler;
 public class BuchungTest {
 	private BuchungHandler myBean = new BuchungHandler();
 
-//	@Test
-//	 public void testCreateBuchung() {
-//	 assertEquals(SuccessHandler.BUCHUNGANLAGE, myBean.createBuchung(
-//	 "1. Passagier: Halil Özdogan (Anschrift: Am Stockhof 2, 31785 Hameln, Geburtsdatum: 08.09.1995, Nationalitaet: deutsch)",
-//	 "MH1/4: Abflug: 2018-14-01 23:14, Ankunft: 2018-14-01 23:14 (Preis: 25.00€)"));
-//	 }
+	@Test
+	 public void testCreateBuchung() {
+	 assertEquals(ErrorHandler.BUCHUNGSCHONVORHANDEN, myBean.createBuchung(
+	 "1. Passagier: Halil Özdogan (Anschrift: Am Stockhof 2, 31785 Hameln, Geburtsdatum: 08.09.1995, Nationalitaet: deutsch)",
+	 "MH1/5: Abflug: 2018-14-01 23:14, Ankunft: 2018-14-01 23:14 (Preis: 25.00€)"));
+	 }
 
 	@Test
 	public void testCreateBuchungNegative() {

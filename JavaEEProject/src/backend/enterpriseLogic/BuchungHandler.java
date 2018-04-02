@@ -41,6 +41,17 @@ public class BuchungHandler extends DatabaseHandler {
 		String[] flugArrayString = flugString.split("\\:");
 		String flugid = flugArrayString[0];
 
+		Query query = em.createNamedQuery("Buchung.findbyPassagier").setParameter("passagierid", passagierid);
+		List<Buchung> buchungsliste = new ArrayList<Buchung>();
+		for (Object o : query.getResultList()) {
+			buchungsliste.add((Buchung) o);
+		}
+		for (Buchung b : buchungsliste) {
+			if (b.getFlugid().equals(flugid)) {
+				em.close();
+				return ErrorHandler.BUCHUNGSCHONVORHANDEN;
+			}
+		}
 		Buchung buchung = new Buchung();
 		buchung.setBuchungsdatum(new Date());
 		buchung.setFlugid(flugid);
@@ -72,7 +83,8 @@ public class BuchungHandler extends DatabaseHandler {
 				Query queryPassagier = em.createNamedQuery("Passagier.findbyID").setParameter("id", passagierid);
 				Passagier passagier = (Passagier) queryPassagier.getResultList().get(0);
 				buchungsliste.add(buchung.getBuchungid() + ". Buchung am " + buchung.getBuchungsdatum().toString()
-						+ ", Flug: " + buchung.getFlugid() + ", Passagier: " + passagier.getVorname() + " " + passagier.getNachname());
+						+ ", Flug: " + buchung.getFlugid() + ", Passagier: " + passagier.getVorname() + " "
+						+ passagier.getNachname());
 			}
 
 		}
@@ -80,6 +92,7 @@ public class BuchungHandler extends DatabaseHandler {
 
 		return buchungsliste;
 	}
+
 	public List<String> getBuchungenbyPassagier(String passagierString) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -98,7 +111,8 @@ public class BuchungHandler extends DatabaseHandler {
 				Query queryPassagier = em.createNamedQuery("Passagier.findbyID").setParameter("id", passagierid);
 				Passagier passagier = (Passagier) queryPassagier.getResultList().get(0);
 				buchungsliste.add(buchung.getBuchungid() + ". Buchung am " + buchung.getBuchungsdatum().toString()
-						+ ", Flug: " + buchung.getFlugid() + ", Passagier: " + passagier.getVorname() + " " + passagier.getNachname());
+						+ ", Flug: " + buchung.getFlugid() + ", Passagier: " + passagier.getVorname() + " "
+						+ passagier.getNachname());
 			}
 
 		}
@@ -106,6 +120,7 @@ public class BuchungHandler extends DatabaseHandler {
 
 		return buchungsliste;
 	}
+
 	public String calculateCapacity(String flugString) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -116,16 +131,16 @@ public class BuchungHandler extends DatabaseHandler {
 		Flug flug = (Flug) query.getResultList().get(0);
 		Query queryFlugzeug = em.createNamedQuery("Flugzeug.findbyID").setParameter("id", flug.getFlugzeugid());
 		Flugzeug flugzeug = (Flugzeug) queryFlugzeug.getResultList().get(0);
-		List<String> buchungsliste = getBuchungenbyFlug(flugid+":");
-		for(int i = 0;i<buchungsliste.size();i++) {
+		List<String> buchungsliste = getBuchungenbyFlug(flugid + ":");
+		for (int i = 0; i < buchungsliste.size(); i++) {
 			buchungsanzahl++;
 		}
-		if(flugzeug.getSitzplaetze()==0) {
+		if (flugzeug.getSitzplaetze() == 0) {
 			return ErrorHandler.FLUGZEUGNICHTZUGEORDNET;
 		}
 		int frei = flugzeug.getSitzplaetze();
 		frei = frei - buchungsanzahl;
-		return frei + " von "+ flugzeug.getSitzplaetze() + " Plaetzen noch frei." ;
-		
+		return frei + " von " + flugzeug.getSitzplaetze() + " Plaetzen noch frei.";
+
 	}
 }

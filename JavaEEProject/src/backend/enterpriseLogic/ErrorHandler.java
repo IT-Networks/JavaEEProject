@@ -15,4 +15,5 @@ public final class ErrorHandler {
 	public static final String FLUGZEUGBEREITSZUGEORDNET = "Dieses Flugzeug wurde bereits einem Flug zugeordnet.";
 	public static final String FLUGZEUGDIESEMFLUGZUGEORDNET = "Dieser Flugzeug wurde bereits diesem Flug zugeordnet.";
 	public static final String STATUSNICHTSETZBAR = "Der Status kann nicht gesetzt werden.";
+	public static final String BUCHUNGSCHONVORHANDEN = "Diese Buchung ist bereits vorhanden.";
 }
