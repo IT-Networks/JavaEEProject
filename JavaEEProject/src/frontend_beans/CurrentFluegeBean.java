@@ -10,44 +10,28 @@ import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotNull;
 
 import backend.enterpriseLogic.FlugHandler;
+import backend.enterpriseLogic.ModelHandler;
 import backend.enterpriseLogic.PassagierHandler;
 import backend.models.FlugModel;
 
+
 @ManagedBean
 @RequestScoped
-public class CurrentFluegeBean {
+public class CurrentFluegeBean { 
 
+	
 	@NotNull
 	private List<FlugModel> allFluege;
 
 	@NotNull
 	private List<String> allPassagiere;
 
-	@NotNull
-	private FlugModel currentSelectedFlugModel;
+
 	
-	@NotNull
-	private String buchungen;
-	
-	public String getBuchungen() {
-		return buchungen;
-	}
 
-	public void setBuchungen(String buchungen) {
-		this.buchungen = buchungen;
-	}
-
-	public FlugModel getCurrentSelectedFlugModel() {
-		return currentSelectedFlugModel;
-	}
-
-	public void setCurrentSelectedFlugModel(FlugModel currentSelectedFlugModel) {
-		this.currentSelectedFlugModel = currentSelectedFlugModel;
-	}
-
-	public List<String> getAllPassagiere() {
-		PassagierHandler ph = new PassagierHandler();
-		return ph.getAllPassagiere();
+public List<String> getAllPassagiere() {
+	PassagierHandler ph = new PassagierHandler();
+	return ph.getAllPassagiere();
 
 	}
 
@@ -55,26 +39,25 @@ public class CurrentFluegeBean {
 		this.allPassagiere = allPassagiere;
 	}
 
-	public List<FlugModel> getAllFluege() {
-		if(allFluege == null) {
-			FlugHandler fH = new FlugHandler();
-			this.allFluege = fH.getAllFlugModels();
-			return allFluege;
-		}
-		else
-			return allFluege;
-	}
+public List<FlugModel> getAllFluege() {
+	ModelHandler mH = new ModelHandler();
+	this.allFluege = mH.getAllFlugModels();
+	return allFluege;
+}
 
-	public void setAllFluege(List<FlugModel> allFluege) {
-		this.allFluege = allFluege;
-	}
+public void setAllFluege(List<FlugModel> allFluege) {
+	this.allFluege = allFluege;
+}
 
-	public void onSelect(FlugModel flug) {
-		if(flug != null) {
-		  System.out.println("OnSelect:" + flug.getName());
-		  buchungen = flug.getBuchungen().toString();
-		}
-		  
-	}
+public void assignPassagier()
+{
+	FacesMessage msg;
+	String result = "Erfolgreich angelegt!";
+	
+	msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+			result);
+	FacesContext.getCurrentInstance().addMessage("buchungForm:passagierDropDown", msg);
+}
+
 
 }

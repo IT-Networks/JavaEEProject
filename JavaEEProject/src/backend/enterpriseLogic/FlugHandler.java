@@ -5,7 +5,6 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,10 +17,7 @@ import javax.persistence.Query;
 
 import org.apache.commons.lang3.time.DateUtils;
 
-import backend.models.FlugModel;
 import backend.entities.Flug;
-import backend.entities.Flughafen;
-import backend.entities.Mahlzeit;
 import backend.entities.Relation;
 
 /**
@@ -124,33 +120,7 @@ public class FlugHandler extends DatabaseHandler {
 		return flugliste;
 	}
 
-	public List<FlugModel> getAllFlugModels() {
-		List<FlugModel> flugModelListe = new ArrayList<FlugModel>();
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		Query queryFlug = em.createNamedQuery("Flug.findAll");
-		List<Flug> fluglisteDB = new ArrayList<Flug>();
-		for (Object o : queryFlug.getResultList()) {
-			fluglisteDB.add((Flug) o);
-		}
-		for (Flug flug : fluglisteDB) {
-			Query queryRelation = em.createNamedQuery("Relation.findbyID").setParameter("id",
-					flug.getRelation().getRelationid());
-			Relation relation = (Relation) queryRelation.getResultList().get(0);
-			Query queryFlughafen = em.createNamedQuery("Flughafen.findStartUndZiel")
-					.setParameter("start", relation.getStartort()).setParameter("ziel", relation.getZielort());
-			Flughafen startFlughafen = (Flughafen) queryFlughafen.getResultList().get(0);
-			Flughafen zielFlughafen = (Flughafen) queryFlughafen.getResultList().get(1);
-			Query queryMahlzeit = em.createNamedQuery("Mahlzeit.findbyID").setParameter("id", flug.getMahlzeitid());
-			Mahlzeit mahlzeit = (Mahlzeit) queryMahlzeit.getResultList().get(0);
-			BuchungHandler bH = new BuchungHandler();
-			flugModelListe.add(new FlugModel(startFlughafen.getName(), zielFlughafen.getName(), mahlzeit.getName(),
-					flug.getFlugid(), bH.getBuchungenbyFlug(flug.getFlugid() + ":")));
-		}
-		return flugModelListe;
-	}
-
-	public String getFlugStatus(String aktuellString, String flugString) {
+	public String getFlugStatus(String aktuellString, String flugString) throws ParseException {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		int randomNum = ThreadLocalRandom.current().nextInt(0, 10 + 1);
@@ -159,7 +129,8 @@ public class FlugHandler extends DatabaseHandler {
 		Query queryFlug = em.createNamedQuery("Flug.findbyID").setParameter("id", flugid);
 		Flug flug = (Flug) queryFlug.getResultList().get(0);
 		Date abflugszeit = flug.getAbflug();
-		Date aktuell = Date.from(Instant.parse(aktuellString));
+		DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+		Date aktuell = dateFormat.parse(aktuellString);
 		if (randomNum == 0) {
 			em.close();
 			return Status.CANCELED;
@@ -168,7 +139,7 @@ public class FlugHandler extends DatabaseHandler {
 			em.close();
 			return Status.DELAYED;
 		}
-		if (abflugszeit.before(aktuell)) {
+		if (abflugszeit.before(aktuell)||abflugszeit.equals(aktuell)) {
 			em.close();
 			return Status.DEPARTURED;
 		}
