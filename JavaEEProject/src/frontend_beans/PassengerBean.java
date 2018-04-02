@@ -108,7 +108,7 @@ public class PassengerBean {
 		PassagierHandler ph = new PassagierHandler();
 		String result = ph.createPassagier(name, lastname, location, birthdy, nationality);
 		
-		if(result.equals(SuccessHandler.MAHLZEITANLAGE)) {
+		if(result.equals(SuccessHandler.PASSAGIERANLAGE)) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO,result,"");
 			FacesContext.getCurrentInstance().addMessage("passengerForm:creatPessenger", msg);
 		}
