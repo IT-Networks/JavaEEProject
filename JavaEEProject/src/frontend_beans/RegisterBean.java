@@ -82,8 +82,16 @@ public class RegisterBean {
 	public void register() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException,
 			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		NutzerHandler nh = new NutzerHandler();
+		FacesMessage msg;
 		String output = nh.createNutzer(name, lastname, username, password, profilTyp);
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", output);
-		FacesContext.getCurrentInstance().addMessage("registerForm:name", msg);
+		if (result.equals(SuccessHandler.REGISTRIERUNG)) {
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", output);
+			FacesContext.getCurrentInstance().addMessage("registerForm:register", msg);
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/currentFluege.xhtml");
+		} else {
+			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", result);
+			FacesContext.getCurrentInstance().addMessage("registerForm:register", msg);
+		} 
+}
 	}
 }
