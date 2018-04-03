@@ -99,8 +99,8 @@ public class FluegeRelationBean {
 	private List<String> airplains;
 
 	public List<String> getRelations() {
-		FlugHandler fh = new FlugHandler();
-		relations = fh.getAllRelationen();
+		RelationHandler rh = new RelationHandler();
+		relations = rh.getAllRelationen();
 		return relations;
 	}
 

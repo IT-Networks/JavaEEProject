@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<%@include file="/WEB-INF/header.xhtml" %>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>  
@@ -12,7 +11,7 @@
     <div class="container-fluid">
         <div class="panel panel-success">
             <div class="panel-heading" align="center">
-                <h4><b><font color="black" style="font-family: fantasy;">My First Login Demo</font> </b></h4>
+                <h4><b><font color="black" style="font-family: fantasy;">Logout</font> </b></h4>
             </div>
             <div class="panel-body"align="center">
                  

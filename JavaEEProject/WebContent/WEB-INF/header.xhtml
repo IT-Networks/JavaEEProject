@@ -6,7 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>FlÃ¼ge buchen leicht gemacht</title>
+	<title>Flüge buchen leicht gemacht</title>
 	<meta name="author" content="Riccardo Massera"></meta>
 	<style>
 body {
@@ -25,23 +25,23 @@ body {
 		sticky="false" fixed="top">
 		<b:navbarLinks>
 			<b:navLink value="Home" href="index.xhtml"></b:navLink>
-			<b:navLink value="Aktuelle FlÃ¼ge" href="currentFluege.xhtml"></b:navLink>
+			<b:navLink value="Aktuelle Flüge" href="currentFluege.xhtml"></b:navLink>
 			<b:navLink value="Login" href="login.xhtml"
 				rendered="#{!userInfoBean.loggedIn}"></b:navLink>
 			<b:dropMenu value="Manager Features"
 				rendered="#{userInfoBean.userManager}">
-				<b:navLink value="FlÃ¼ge und Relationen"
+				<b:navLink value="Flüge und Relationen"
 					href="fluegeRelationen.xhtml"></b:navLink>
-				<b:navLink value="Auslastungen der FlÃ¼ge" href="auslastung.xhtml"></b:navLink>
+				<b:navLink value="Auslastungen der Flüge" href="auslastung.xhtml"></b:navLink>
 				<b:navLink value="Flugzeug anlegen" href="createFlugzeug.xhtml"></b:navLink>
 			</b:dropMenu>
-			<b:dropMenu value="FlÃ¼ge">
+			<b:dropMenu value="Flüge">
 				<b:navLink value="Buchung anlegen" href="createBuchung.xhtml"></b:navLink>
 				<b:navLink value="Passagiere anlegen" href="createPassagier.xhtml"></b:navLink>
 				<b:navLink value="Mahlzeiten anlegen und zuordnen" href="createMahlzeit.xhtml"></b:navLink>
 			</b:dropMenu>
 			<b:navLink value="Registrieren" href="register.xhtml" rendered="#{!userInfoBean.loggedIn}"></b:navLink>
-			<b:navLink value="Ausloggen" href="logout.jsp" rendered="#{!userInfoBean.loggedIn}"></b:navLink>
+			<b:navLink value="Ausloggen" href="logout.jsp" rendered="#{userInfoBean.loggedIn}"></b:navLink>
 		</b:navbarLinks>
 	</b:navBar>
 </h:head>

@@ -30,5 +30,15 @@ public class SessionUtils {
 		else
 			return null;
 	}
+	
+	public static String logout() {
+		HttpSession session = SessionUtils.getSession();
+		session.invalidate();
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		if(getUserName() == null)
+			return "Augeloggt";
+		else
+			return "Fehler beim ausloggen";
+	}
 
 }

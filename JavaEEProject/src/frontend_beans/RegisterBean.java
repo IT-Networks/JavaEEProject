@@ -1,5 +1,6 @@
 package frontend_beans;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import backend.enterpriseLogic.NutzerHandler;
+import backend.enterpriseLogic.SuccessHandler;
 
 @ManagedBean
 @RequestScoped
@@ -79,19 +81,18 @@ public class RegisterBean {
 		return lastname;
 	}
 
-	public void register() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException,
-			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+	public void register() throws InvalidKeyException, NoSuchAlgorithmException,
+			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		NutzerHandler nh = new NutzerHandler();
 		FacesMessage msg;
-		String output = nh.createNutzer(name, lastname, username, password, profilTyp);
+		String result = nh.createNutzer(name, lastname, username, password, profilTyp);
 		if (result.equals(SuccessHandler.REGISTRIERUNG)) {
-			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", output);
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", result);
 			FacesContext.getCurrentInstance().addMessage("registerForm:register", msg);
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/currentFluege.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/JavaEEProject/currentFluege.xhtml");
 		} else {
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", result);
 			FacesContext.getCurrentInstance().addMessage("registerForm:register", msg);
 		} 
-}
 	}
 }

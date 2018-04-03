@@ -21,7 +21,8 @@ import javax.persistence.Query;
 import backend.entities.Nutzer;
 
 /**
- * Session Bean implementation class NutzerHandler
+ * Session Bean implementation class NutzerHandler <br> In dieser Klasse befinden
+ * sich Methoden rund um die Entität Nutzer.
  */
 @Stateless
 @LocalBean
@@ -30,7 +31,21 @@ public class NutzerHandler extends DatabaseHandler {
 	public NutzerHandler() {
 		super();
 	}
-
+	/**
+	 *  Methode, die einen Nutzer in der Datenbank anlegt und somit registriert. 
+	 * @param vorname Vorname des Uers
+	 * @param nachname Nachname des Users
+	 * @param anmeldename eindeutiger Anmeldename
+	 * @param passwort Das Passwort wird an die Methode als Klartext übertragen.
+	 * @param nutzertyp entweder Manager oder Mitarbeiter
+	 * @return gibt entweder eine Fehlermeldung (ErrorHandler) oder eine Erfolgsmeldung (SuccessHandler) aus.
+	 * @throws InvalidKeyException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws UnsupportedEncodingException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws NoSuchAlgorithmException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws NoSuchPaddingException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws IllegalBlockSizeException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws BadPaddingException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 */
 	public String createNutzer(String vorname, String nachname, String anmeldename, String passwort, String nutzertyp)
 			throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
 			IllegalBlockSizeException, BadPaddingException {
@@ -69,7 +84,18 @@ public class NutzerHandler extends DatabaseHandler {
 		em.close();
 		return SuccessHandler.REGISTRIERUNG;
 	}
-
+	/**
+	 * Methode, die die Richtigkeit der Nutzerdaten gewährleistet. Datenbankabfrage auf Nutzername und Passwort.
+	 * @param anmeldename Anmeldename des Nutzers
+	 * @param passwort Das Passwort wird an die Methode als Klartext übertragen.
+	 * @return gibt entweder eine Fehlermeldung (ErrorHandler) oder eine Erfolgsmeldung (SuccessHandler) aus.
+	 * @throws InvalidKeyException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws UnsupportedEncodingException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws NoSuchAlgorithmException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws NoSuchPaddingException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws IllegalBlockSizeException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 * @throws BadPaddingException Exception bei Verschlüsselung/Entschlüsselung des Passworts.
+	 */
 	public String checkPasswort(String anmeldename, String passwort)
 			throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
 			IllegalBlockSizeException, BadPaddingException {
@@ -95,7 +121,11 @@ public class NutzerHandler extends DatabaseHandler {
 		
 		return SuccessHandler.LOGIN;
 	}
-	
+	/**
+	 * Methode, die zu einem Anmeldenamen den Nutzertypen ausgibt. Es sollte vorher die Methode checkPasswort ausgeführt werden.
+	 * @param anmeldename Nutzer, zu dem Nutzertyp ausgegebnw werden soll
+	 * @return Nutzertyp des Nutzers
+	 */
 	public String getNutzertyp(String anmeldename) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -108,7 +138,12 @@ public class NutzerHandler extends DatabaseHandler {
 		
 		return nutzerliste.get(0).getNutzertyp();
 	}
-
+	/**
+	 * Generierung eines Keys für die AES Verschlüsselung/Entschlüsselung
+	 * @return generierter Key
+	 * @throws UnsupportedEncodingException
+	 * @throws NoSuchAlgorithmException
+	 */
 	// Code von: https://blog.axxg.de/java-aes-verschluesselung-mit-beispiel/
 	private SecretKeySpec generateKey() throws UnsupportedEncodingException, NoSuchAlgorithmException {
 
@@ -125,7 +160,17 @@ public class NutzerHandler extends DatabaseHandler {
 		SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
 		return secretKeySpec;
 	}
-
+	/**
+	 *  Verschlüsselung des Passworts, damit dieses in der Datenbank nicht als Klartext gespeichert wird.
+	 * @param passwort Passwort in Klartext
+	 * @return verschlüsseltes Passwort
+	 * @throws UnsupportedEncodingException
+	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchPaddingException
+	 * @throws InvalidKeyException
+	 * @throws IllegalBlockSizeException
+	 * @throws BadPaddingException
+	 */
 	private String encryptPasswort(String passwort) throws UnsupportedEncodingException, NoSuchAlgorithmException,
 			NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		SecretKeySpec secretKeySpec = generateKey();
@@ -140,7 +185,17 @@ public class NutzerHandler extends DatabaseHandler {
 
 		return encryptedPasswort;
 	}
-
+	/**
+	 * Entschlüsselung eines Passwort
+	 * @param encryptedPasswort verschlüsseltes Passwort
+	 * @return entschlüsseltes Passwort
+	 * @throws UnsupportedEncodingException
+	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchPaddingException
+	 * @throws InvalidKeyException
+	 * @throws IllegalBlockSizeException
+	 * @throws BadPaddingException
+	 */
 	private String decryptPasswort(String encryptedPasswort)
 			throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
 			IllegalBlockSizeException, BadPaddingException {

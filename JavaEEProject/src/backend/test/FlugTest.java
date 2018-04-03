@@ -11,10 +11,12 @@ import java.util.List;
 import org.junit.Test;
 
 import backend.enterpriseLogic.FlugHandler;
+import backend.enterpriseLogic.RelationHandler;
 import backend.enterpriseLogic.SuccessHandler;
 
 public class FlugTest {
 	private FlugHandler myBean = new FlugHandler();
+	private RelationHandler myBean2 = new RelationHandler();
 
 	@Test
 	public void testGetFlugStatus() throws ParseException {
@@ -36,7 +38,7 @@ public class FlugTest {
 
 	public void testGetAllFlugzeugs() {
 		List<String> relationenliste = new ArrayList<String>();
-		relationenliste = myBean.getAllRelationen();
+		relationenliste = myBean2.getAllRelationen();
 		for (String str : relationenliste) {
 			System.out.println(str);
 		}

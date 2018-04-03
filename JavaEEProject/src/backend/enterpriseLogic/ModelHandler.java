@@ -18,7 +18,9 @@ import backend.models.DepartureSchedulesModel;
 import backend.models.FlugModel;
 
 /**
- * Session Bean implementation class ModelHandler
+ * Session Bean implementation class ModelHandler. <br>
+ * In dieser Klasse befinden sich Methoden, rund um die DataModels im Package backend.models, <br>
+ * die für die Anzeige im Frontend verwendet werden.
  */
 @Stateless
 @LocalBean
@@ -31,7 +33,10 @@ public class ModelHandler extends DatabaseHandler {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Gibt alle Flüge im Fomat FlugModel aus.
+	 * @return Gibt eine Liste von Typ FlugModel zurück
+	 */
 	public List<FlugModel> getAllFlugModels() {
 		List<FlugModel> flugModelListe = new ArrayList<FlugModel>();
 		em = emf.createEntityManager();
@@ -57,7 +62,14 @@ public class ModelHandler extends DatabaseHandler {
 		}
 		return flugModelListe;
 	}
-
+	/**
+	 * 
+	 * Gibt alle Flüge im Fomat DepartureSchedulesModel aus.
+	 * 
+	 * @param time muss im Format EEE MMM dd HH:mm:ss zzz yyyy  (z.B. Tue Apr 17 17:46:00 CEST 2018) sein
+	 * @return Gibt eine Liste von Typ DepartureSchedulesModel zurück
+	 * @throws ParseException kann bei einem falsch formatieren time-String auftreten.
+	 */
 	public List<DepartureSchedulesModel> getDepartureSchedulesModels(String time) throws ParseException {
 		List<DepartureSchedulesModel> flugModelListe = new ArrayList<DepartureSchedulesModel>();
 		DateFormat rightFormat = new SimpleDateFormat("HH:mm dd.MM.YYYY");

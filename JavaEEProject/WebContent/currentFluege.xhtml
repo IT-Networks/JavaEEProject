@@ -13,9 +13,9 @@
 		<b:container layout="fluid">
 			<b:tabView pills="true"
 				contentStyle="border: 1px solid #ddd;padding:10px">
-				<b:tab title="Aktuelle FlÃ¼ge">
+				<b:tab title="Aktuelle Flüge">
 
-					<b:panel title="FlÃ¼ge" look="primary" collapsible="false">
+					<b:panel title="Flüge" look="primary" collapsible="false">
 						<b:dataTable value="#{currentFluegeBean.allFluege}" var="flug"
 							select="true" selectionMode="single"
 							onselect="ajax:currentFluegeBean.onSelect(flug);" update="@next">
@@ -40,7 +40,7 @@
 					</b:panel>
 				</b:tab>
 				<b:tab title="Flug Status">
-					<b:panel title="FlÃ¼ge" look="primary" collapsible="false">
+					<b:panel title="Flüge" look="primary" collapsible="false">
 						<b:column medium-screen="2">
 							<h:outputText value="Startzeit" for="startTime" />
 						</b:column>
@@ -55,7 +55,7 @@
 							var="departureSchedulesModel" select="true"
 							selectionMode="single"
 							onselect="ajax:currentFluegeBean.onSelectDeparture(departureSchedulesModel);"
-							update="@next">
+							update="@form">
 							<b:dataTableColumn value="#{departureSchedulesModel.flugid}" />
 							<b:dataTableColumn value="#{departureSchedulesModel.startort}" />
 							<b:dataTableColumn value="#{departureSchedulesModel.zielort}" />

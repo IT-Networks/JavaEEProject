@@ -11,7 +11,8 @@ import backend.entities.Flug;
 import backend.entities.Mahlzeit;
 
 /**
- * Session Bean implementation class MahlzeitHandler
+ * Session Bean implementation class MahlzeitHandler <br> In dieser Klasse befinden
+ * sich Methoden rund um die Entität Mahlzeit.
  */
 @Stateless
 @LocalBean
@@ -24,7 +25,13 @@ public class MahlzeitHandler extends DatabaseHandler {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Methode, die eine Mahlzeit anlegt.
+	 * @param name Name der Mahlzeit.
+	 * @param art Art der Mahlzeit.
+	 * @param vegetarisch Vegetarisch ja/nein
+	 * @return gibt entweder eine Fehlermeldung (ErrorHandler) oder eine Erfolgsmeldung (SuccessHandler) aus.
+	 */
 	public String createMahlzeit(String name, String art, boolean vegetarisch) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -49,7 +56,13 @@ public class MahlzeitHandler extends DatabaseHandler {
 		em.close();
 		return SuccessHandler.MAHLZEITANLAGE;
 	}
-
+	/**
+	 * gibt alle Mahlzeiten aus. <br>
+	 * Beispiel: "1. Mahlzeit: Pizza Margarita (Teigwaren, vegetarisch: ja)" <br>
+	 * Der Default Wert mit der mahlzeitid=1 wird nicht ausgegeben.<br>
+	 * Der erste angezeigt Eintrag ist der zweite in der Datenbank. (Es wird auch mit 1. Mahlzeit begonnen)
+	 * @return gibt eine List<String> aus. Beispiel siehe Beschreibung der Methode.
+	 */
 	public List<String> getAllMahlzeiten() {
 		List<String> mahlzeitliste = new ArrayList<String>();
 		em = emf.createEntityManager();
@@ -76,7 +89,12 @@ public class MahlzeitHandler extends DatabaseHandler {
 		em.close();
 		return mahlzeitliste;
 	}
-	
+	/**
+	 * Methode, die eine Mahlzeit einem Flug zuordnet.
+	 * @param mahlzeitString String im Format der Rückgabe der Methode MahlzeitHandler.getAllMahlzeiten()
+	 * @param flugString tring im Format der Rückgabe der Methode FlugHandler.getAllFluege()
+	 * @return gibt eine Erfolgsmeldung (SuccessHandler) aus.
+	 */
 	public String assignMahlzeitToFlug(String mahlzeitString, String flugString) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();

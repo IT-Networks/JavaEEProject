@@ -21,7 +21,8 @@ import backend.entities.Flug;
 import backend.entities.Relation;
 
 /**
- * Session Bean implementation class FlugHandler
+ * Session Bean implementation class FlugHandler. <br> In dieser Klasse befinden
+ * sich Methoden rund um die Entität Flug.
  */
 @Stateless
 @LocalBean
@@ -34,7 +35,18 @@ public class FlugHandler extends DatabaseHandler {
 	public FlugHandler() {
 		super();
 	}
-
+	/**
+	 * Methode, die eine Flug anlegt. <br>
+	 * Anfangs werden die Felder flugzeugid und mahlzeitid auf die default Felder der Tabellen Flugzeug und Mahlzeit belegt (jeweils die ID=1). <br>
+	 * Die FlugID setzt sich nach dem folgenden Muster zusammen: MH %relationid%/%flugnummer% (Die Flugnummer wird bei Neuanlage um 1 erhöht). <br>
+	 * Folglich hat der erste Flug der Relation 1  die FlugID MH1/1 der zweite Flug MH1/2 usw. <br>
+	 * 
+	 * @param abflug muss im Format EEE MMM dd HH:mm:ss zzz yyyy  (z.B. Tue Apr 17 17:46:00 CEST 2018) sein
+	 * @param relationString String im Format der Rückgabe der Methode FlugHandler.getAllRelationen()
+	 * @param preis Angabe des Preises für den Flug
+	 * @return gibt entweder eine Fehlermeldung (ErrorHandler) oder eine Erfolgsmeldung (SuccessHandler) aus.
+	 * @throws ParseException kann bei einem falsch formatieren abflug-String auftreten.
+	 */
 	public String createFlug(String abflug, String relationString, double preis) throws ParseException {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -75,30 +87,10 @@ public class FlugHandler extends DatabaseHandler {
 		em.close();
 		return SuccessHandler.FLUGANLAGE;
 	}
-
-	public List<String> getAllRelationen() {
-		List<String> relationenliste = new ArrayList<String>();
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		Query query = em.createNamedQuery("Relation.findAll");
-		List<Relation> relationenlisteDB = new ArrayList<Relation>();
-		for (Object o : query.getResultList()) {
-			relationenlisteDB.add((Relation) o);
-		}
-		if (!relationenlisteDB.isEmpty()) {
-			for (Relation relation : relationenlisteDB) {
-				relationenliste.add(relation.getRelationid() + ". Relation: Startort: " + relation.getStartort()
-						+ ", Zielort: " + relation.getZielort() + " (" + relation.getDistanz() + " km, "
-						+ relation.getFlugzeit() + " Stunden)");
-			}
-		}
-		return relationenliste;
-	}
-
 	/**
-	 * not implemented
+	 * gibt alle Flüge aus. Beispiel:  "MH1/1: Abflug: 2018-26-01 01:26, Ankunft: 2018-26-01 01:26 (Preis: 25.00 €)"
 	 * 
-	 * @return
+	 * @return ibt eine List<String> aus. Beispiel siehe Beschreibung der Methode.
 	 */
 	public List<String> getAllFluege() {
 		List<String> flugliste = new ArrayList<String>();
@@ -114,12 +106,18 @@ public class FlugHandler extends DatabaseHandler {
 				String abflug = dateFormat.format(flug.getAbflug());
 				String ankunft = dateFormat.format(flug.getAnkunft());
 				flugliste.add(flug.getFlugid() + ": Abflug: " + abflug + ", Ankunft: " + ankunft + " (Preis: "
-						+ flug.getPreis() + " â‚¬)");
+						+ flug.getPreis() + " €)");
 			}
 		}
 		return flugliste;
 	}
-
+	/**
+	 * Ausgabe des Status eines Flugs zu einer gegebeben Uhrzeit
+	 * @param aktuellString Übergabe eines Zeipunkts im Format: EEE MMM dd HH:mm:ss zzz yyyy  (z.B. Tue Apr 17 17:46:00 CEST 2018)
+	 * @param flugString
+	 * @return String im Format der Rückgabe der Methode FlugHandler.getAllFluege()
+	 * @throws ParseException kann bei einem falsch formatieren akutellString auftreten.
+	 */
 	public String getFlugStatus(String aktuellString, String flugString) throws ParseException {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -155,7 +153,12 @@ public class FlugHandler extends DatabaseHandler {
 		em.close();
 		return ErrorHandler.STATUSNICHTSETZBAR;
 	}
-
+	/**
+	 * Methode, die für die createFlug Methode aus der Abflugszeit und der Flugzeit der Relation die Ankunftszeit errechnet.
+	 * @param abflugszeit Abflugszeit des Flugs
+	 * @param flugzeit Flugzeit der zugehörigen Relation
+	 * @return Ausgabe der Ankunftszeit des Flugs
+	 */
 	private Date calculateAnkunftszeit(Date abflugszeit, Time flugzeit) {
 		Date ankunftszeit = new Date();
 		String[] time = flugzeit.toString().split(":");
@@ -165,7 +168,10 @@ public class FlugHandler extends DatabaseHandler {
 		ankunftszeit = DateUtils.addMinutes(ankunftszeit, minuts);
 		return ankunftszeit;
 	}
-
+	/**
+	 * interne Klasse, um die Status eines Flugs fest zu definieren.
+	 *
+	 */
 	public final class Status {
 		public static final String DEPARTURED = "departured";
 		public static final String SCHEDULED = "scheduled";

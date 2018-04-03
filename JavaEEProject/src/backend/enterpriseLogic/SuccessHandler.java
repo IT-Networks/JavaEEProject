@@ -1,5 +1,7 @@
 package backend.enterpriseLogic;
-
+/**
+ * Klasse, die alle Erfolgsmeldungen aus dem Backend bündelt.
+ */
 public class SuccessHandler {
 	public static final String PASSAGIERANLAGE = "Erfolgreiche Anlage des Passagiers!";
 	public static final String BUCHUNGANLAGE = "Erfolgreiche Anlage der Buchung!";	

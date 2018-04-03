@@ -47,11 +47,8 @@ public class LogoutServlet extends HttpServlet {
 	
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-    	HttpSession session = SessionUtils.getSession();
-		session.invalidate();
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		
-       
+    	String message = SessionUtils.logout();
+		System.out.println(message);
     }
 
 }

@@ -1,5 +1,7 @@
 package backend.enterpriseLogic;
-
+/**
+ * Klasse, die alle Fehlermeldungen aus dem Backend bündelt.
+ */
 public final class ErrorHandler {
 	public static final String STARTORTNICHTGEFUNDEN = "Der Startort konnte nicht gefunden";
 	public static final String ZIELORTNICHTGEFUNDEN = "Der Zielort konnte nicht gefunden";

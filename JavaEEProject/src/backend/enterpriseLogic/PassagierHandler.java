@@ -15,7 +15,8 @@ import javax.persistence.Query;
 import backend.entities.Passagier;
 
 /**
- * Session Bean implementation class PassagierHandler
+ * Session Bean implementation class PassagierHandler. <br> In dieser Klasse befinden
+ * sich Methoden rund um die Entität Passagier.
  */
 @Stateless
 @LocalBean
@@ -28,7 +29,16 @@ public class PassagierHandler extends DatabaseHandler {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Methode, die einen Passagier anlegt.
+	 * @param vorname Vorname des Passagiers
+	 * @param nachname Nachname des Passagiers
+	 * @param anschrift Anschrift des Passagiers
+	 * @param geburtsdatum Geburtsdatum des Passagiers
+	 * @param nationalitaet Nationalitaet des Passagiers
+	 * @return gibt entweder eine Fehlermeldung (ErrorHandler) oder eine Erfolgsmeldung (SuccessHandler) aus.
+	 * @throws ParseException
+	 */
 	public String createPassagier(String vorname, String nachname, String anschrift, String geburtsdatum,
 			String nationalitaet) throws ParseException {
 		em = emf.createEntityManager();
@@ -50,7 +60,11 @@ public class PassagierHandler extends DatabaseHandler {
 		em.close();
 		return SuccessHandler.PASSAGIERANLAGE;
 	}
-
+	/**
+	 * gibt alle Passagier aus:<br>
+	 * Beispiel: "1. Passagier: Halil Özdogan (Anschrift: Am Stockhof 2, 31785 Hameln, Geburtsdatum: 08.09.1995, Nationalitaet: deutsch)"
+	 * @return gibt eine List<String> aus. Beispiel siehe Beschreibung der Methode.
+	 */
 	public List<String> getAllPassagiere() {
 		List<String> passagierliste = new ArrayList<String>();
 		em = emf.createEntityManager();

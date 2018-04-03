@@ -1,5 +1,6 @@
 package frontend_beans;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -46,8 +47,8 @@ public class LoginBean {
 		this.password = password;
 	}
 
-	public void login() throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException,
-			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+	public void login() throws InvalidKeyException, NoSuchAlgorithmException,
+			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		NutzerHandler nh = new NutzerHandler();
 		String result = nh.checkPasswort(username, password);
 		FacesMessage msg;
@@ -58,7 +59,7 @@ public class LoginBean {
 			session.setAttribute("profil", "Mitarbeiter");
 			session.setAttribute("role", nh.getNutzertyp(username));
 			FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/currentFluege.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/JavaEEProject/currentFluege.xhtml");
 		} else if (result.equals(ErrorHandler.NUTZERNICHTGEFUNDEN)) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", result);
 			FacesContext.getCurrentInstance().addMessage("loginForm:username", msg);
