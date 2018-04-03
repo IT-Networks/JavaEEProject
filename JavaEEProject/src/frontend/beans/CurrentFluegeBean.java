@@ -1,4 +1,4 @@
-package frontend_beans;
+package frontend.beans;
 
 import java.text.ParseException;
 import java.util.ArrayList;

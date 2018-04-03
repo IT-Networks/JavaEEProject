@@ -1,4 +1,4 @@
-package frontend_beans;
+package frontend.beans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import frontend_controller.SessionUtils;
+import frontend.controller.SessionUtils;
 
 @ManagedBean
 @RequestScoped

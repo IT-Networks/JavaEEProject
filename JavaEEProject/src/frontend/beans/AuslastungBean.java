@@ -1,4 +1,4 @@
-package frontend_beans;
+package frontend.beans;
 
 import java.util.List;
 

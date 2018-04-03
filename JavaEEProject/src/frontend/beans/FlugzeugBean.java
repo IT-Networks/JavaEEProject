@@ -1,4 +1,4 @@
-package frontend_beans;
+package frontend.beans;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;

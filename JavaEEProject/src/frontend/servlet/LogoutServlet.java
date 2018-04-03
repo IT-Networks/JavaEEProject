@@ -1,4 +1,4 @@
-package frontend_servlet;
+package frontend.servlet;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import frontend_controller.SessionUtils;
+import frontend.controller.SessionUtils;
 
 /**
  * Servlet implementation class LogoutServlet

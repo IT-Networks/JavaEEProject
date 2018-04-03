@@ -1,4 +1,4 @@
-package frontend_controller;
+package frontend.controller;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;

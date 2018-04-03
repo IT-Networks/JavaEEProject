@@ -1,4 +1,4 @@
-package frontend_beans;
+package frontend.beans;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import backend.enterpriseLogic.ErrorHandler;
 import backend.enterpriseLogic.NutzerHandler;
 import backend.enterpriseLogic.SuccessHandler;
-import frontend_controller.SessionUtils;
+import frontend.controller.SessionUtils;
 
 @ManagedBean
 @RequestScoped
