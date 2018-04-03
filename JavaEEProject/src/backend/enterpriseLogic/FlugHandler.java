@@ -114,7 +114,7 @@ public class FlugHandler extends DatabaseHandler {
 				String abflug = dateFormat.format(flug.getAbflug());
 				String ankunft = dateFormat.format(flug.getAnkunft());
 				flugliste.add(flug.getFlugid() + ": Abflug: " + abflug + ", Ankunft: " + ankunft + " (Preis: "
-						+ flug.getPreis() + " €)");
+						+ flug.getPreis() + " â‚¬)");
 			}
 		}
 		return flugliste;
@@ -166,7 +166,7 @@ public class FlugHandler extends DatabaseHandler {
 		return ankunftszeit;
 	}
 
-	private final class Status {
+	public final class Status {
 		public static final String DEPARTURED = "departured";
 		public static final String SCHEDULED = "scheduled";
 		public static final String LANDED = "landed";
