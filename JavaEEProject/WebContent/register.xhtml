@@ -59,7 +59,7 @@
 							<f:facet name="prepend">
 								<b:icon name="user" />
 							</f:facet>
-							<f:selectItem itemLabel="(Bitte auswählen)" />
+							<f:selectItem itemLabel="(Bitte auswÃ¤hlen)" />
 							<f:selectItem itemLabel="Manager" />
 							<f:selectItem itemLabel="Mitarbeiter" />
 						</b:selectOneMenu>
@@ -84,6 +84,8 @@
 					<b:column medium-screen="6" style-class="message">
 						<b:message for="name" />
 					</b:column>
+					</b:row>
+					<b:row>
 					<b:column medium-screen="2">
 						<h:outputText value="Nachname:" />
 					</b:column>
@@ -97,12 +99,17 @@
 						</b:inputText>
 					</b:column>
 					<b:column medium-screen="6" style-class="message">
-						<b:message for="name" line-break-tag="/&gt;&lt;/p&gt;" />
+						<b:message for="lastname"/>
 					</b:column>
+					</b:row>
+					<b:row>
 					<b:column span="2" offset="2">
-						<b:commandButton value="Registrieren"
+						<b:commandButton value="Registrieren" id="register"
 							onclick="ajax:registerBean.register()" update="@form"
 							look="primary" style="width:100%" />
+					</b:column>
+					<b:column medium-screen="6" style-class="message">
+						<b:message for="register" />
 					</b:column>
 				</b:row>
 			</b:panel>
