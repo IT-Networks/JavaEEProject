@@ -32,7 +32,7 @@ public class ModelHandler extends DatabaseHandler {
 	 */
 	public ModelHandler() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	/**
 	 * Gibt alle Flüge im Fomat FlugModel aus.

@@ -26,7 +26,7 @@ public class BuchungHandler extends DatabaseHandler {
 	 */
 	public BuchungHandler() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	/**
 	 * Methode, die eine Buchung anlegt. <br>

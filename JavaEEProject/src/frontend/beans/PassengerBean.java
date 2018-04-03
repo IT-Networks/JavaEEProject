@@ -1,18 +1,12 @@
 package frontend.beans;
 
 import java.text.ParseException;
-import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import backend.enterpriseLogic.FlugHandler;
-import backend.enterpriseLogic.FlugzeugHandler;
-import backend.enterpriseLogic.MahlzeitHandler;
 import backend.enterpriseLogic.PassagierHandler;
 import backend.enterpriseLogic.SuccessHandler;
 

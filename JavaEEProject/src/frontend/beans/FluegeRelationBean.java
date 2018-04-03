@@ -7,13 +7,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
-
 import backend.enterpriseLogic.FlugHandler;
 import backend.enterpriseLogic.FlugzeugHandler;
 import backend.enterpriseLogic.RelationHandler;

@@ -27,7 +27,7 @@ public class PassagierHandler extends DatabaseHandler {
 	 */
 	public PassagierHandler() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	/**
 	 * Methode, die einen Passagier anlegt.

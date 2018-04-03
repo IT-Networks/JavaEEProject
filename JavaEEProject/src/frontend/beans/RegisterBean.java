@@ -1,7 +1,6 @@
 package frontend.beans;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -13,8 +12,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.Size;
-import javax.servlet.http.HttpSession;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 import backend.enterpriseLogic.NutzerHandler;

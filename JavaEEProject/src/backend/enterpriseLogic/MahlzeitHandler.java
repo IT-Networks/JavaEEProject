@@ -23,7 +23,7 @@ public class MahlzeitHandler extends DatabaseHandler {
 	 */
 	public MahlzeitHandler() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	/**
 	 * Methode, die eine Mahlzeit anlegt.
