@@ -26,7 +26,7 @@ public class CurrentFluegeBean {
 	private List<FlugModel> allFluege;
 
 	@NotNull
-	private List<DepartureSchedulesModel> allFluegeWithStatus;
+	private List<DepartureSchedulesModel> allFluegeWithStatus = new ArrayList<DepartureSchedulesModel>();
 
 	@NotNull
 	private List<String> allPassengers;
@@ -39,6 +39,8 @@ public class CurrentFluegeBean {
 
 	@NotNull
 	private String time;
+	
+	private String lastTime = "1";
 
 	@NotNull
 	private String detailsFlug;
@@ -108,16 +110,17 @@ public class CurrentFluegeBean {
 	}
 
 	public List<DepartureSchedulesModel> getAllFluegeWithStatus() {
-		if (allFluegeWithStatus == null) {
 			ModelHandler mH = new ModelHandler();
 			try {
-				this.allFluegeWithStatus = mH.getDepartureSchedulesModels(time);
+				if(time != null && time != "" && time != lastTime) {
+					this.allFluegeWithStatus = mH.getDepartureSchedulesModels(time);
+					lastTime = time;
+				}
 			} catch (ParseException e) {
 				// Message for parse exception
 			}
 			return allFluegeWithStatus;
-		} else
-			return allFluegeWithStatus;
+
 	}
 
 	public void setAllFluegeWithStatus(List<DepartureSchedulesModel> allFluegeWithStatus) {

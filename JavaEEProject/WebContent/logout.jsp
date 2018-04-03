@@ -31,7 +31,8 @@
                                 <label>Wollen Sie sich wirklich ausloggen?</label>                              
                             </div>
                             <button type="submit" style="width: 100%; font-size:1.1em;" class="btn btn-large btn btn-success btn-lg btn-block" ><b>Ausloggen</b></button>
-                                                  
+                              
+                            <a href="/JavaEEProject/currentFluege.xhtml" class="label">Zurück zu den Flügen</a>                  
                         </form>
 
                         </div>
@@ -40,7 +41,6 @@
                 </div>
                
             </div>
-            <div class="panel-footer" align="center"><font style="color: #111">Copyright @2014  <a href="http://mysite.com/">mysite.com</a>, All Rights Reserved. </font></div>
         </div>
     </div>
    

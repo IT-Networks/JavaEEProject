@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -72,7 +73,7 @@ public class ModelHandler extends DatabaseHandler {
 	 */
 	public List<DepartureSchedulesModel> getDepartureSchedulesModels(String time) throws ParseException {
 		List<DepartureSchedulesModel> flugModelListe = new ArrayList<DepartureSchedulesModel>();
-		DateFormat rightFormat = new SimpleDateFormat("HH:mm dd.MM.YYYY");
+		DateFormat rightFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		FlugHandler fH = new FlugHandler();

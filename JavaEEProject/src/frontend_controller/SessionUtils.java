@@ -1,25 +1,26 @@
 package frontend_controller;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class SessionUtils {
 
-
+	private static HttpSession mysession;
+	private static ExternalContext context;
+	
 	public static HttpSession getSession() {
-		return (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(false);
+		context = FacesContext.getCurrentInstance().getExternalContext();
+		return mysession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
 
 	public static HttpServletRequest getRequest() {
-		return (HttpServletRequest) FacesContext.getCurrentInstance()
-				.getExternalContext().getRequest();
+		return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	}
 
 	public static String getUserName() {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(false);
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		return session.getAttribute("username").toString();
 	}
 
@@ -30,15 +31,16 @@ public class SessionUtils {
 		else
 			return null;
 	}
-	
+
 	public static String logout() {
-		HttpSession session = SessionUtils.getSession();
-		session.invalidate();
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		if(getUserName() == null)
+
+		if (mysession != null && context != null) {
+			mysession.invalidate();
+			context.invalidateSession();			
 			return "Augeloggt";
-		else
-			return "Fehler beim ausloggen";
+		} else {
+			return "Bereits ausgeloggt";
+		}
 	}
 
 }

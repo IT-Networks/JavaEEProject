@@ -49,6 +49,7 @@ public class LogoutServlet extends HttpServlet {
         
     	String message = SessionUtils.logout();
 		System.out.println(message);
+		response.sendRedirect(request.getContextPath() + "/login.xhtml");
     }
 
 }
