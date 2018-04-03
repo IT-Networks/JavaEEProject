@@ -37,7 +37,7 @@ public class CurrentFluegeBean {
 	@NotNull
 	private String buchungen;
 
-	@NotNull
+	
 	private String time;
 	
 	private String lastTime = "1";
@@ -163,7 +163,7 @@ public class CurrentFluegeBean {
 			System.out.println("OnSelect:" + flug.getName());
 			buchungen = "";
 			for (int i = 0; i < flug.getBuchungen().size(); i++) {
-				buchungen += flug.getBuchungen().get(i) + "&lt;br/&gt;";
+				buchungen += flug.getBuchungen().get(i) + "\n";
 			}
 
 		}

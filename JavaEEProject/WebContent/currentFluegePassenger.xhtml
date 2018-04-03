@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<ui:include src="/WEB-INF/header.xhtml" />
+</h:head>
+<h:body>
+	<h:form id="currentFlightsForm" rendered="#{userInfoBean.loggedIn}">
+		<b:container layout="fluid">		
+					<b:panel title="Passagiere" look="primary" collapsible="false">
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputText value="Passagiere" for="passagiereDropDown" />
+							</b:column>
+							<b:column medium-screen="4">
+							<b:selectOneMenu value="#{buchungBean.selectedForPassengerForBuchung}"
+								id="passagiereDropDown">
+							<f:selectItems value="#{buchungBean.passangers}" />
+						</b:selectOneMenu>
+							</b:column>
+							</b:row>
+						<b:row>
+						<b:column medium-screen="2">
+							<b:commandButton value="Lade Buchungen" update="@form" look="primary"/>
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputText value="Buchungen" for="details" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputTextarea large-screen="full-width" id="details"
+									value="#{buchungBean.detailsBuchung}">
+								</b:inputTextarea>
+							</b:column>
+						</b:row>
+					</b:panel>
+
+		</b:container>
+	</h:form>
+
+</h:body>
+
+</html>

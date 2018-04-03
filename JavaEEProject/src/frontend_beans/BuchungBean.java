@@ -20,11 +20,34 @@ public class BuchungBean {
 	@NotNull
 	private String selectedPassenger;
 	@NotNull
+	private String selectedForPassengerForBuchung;
+	@NotNull
 	private String selectedFlight;
 	@NotNull
 	private List<String> passangers;
 	@NotNull
 	private List<String> flights;
+	
+	private String detailsBuchung;
+	
+	private String test;
+	
+	
+	public String getSelectedForPassengerForBuchung() {
+		return selectedForPassengerForBuchung;
+	}
+
+	public void setSelectedForPassengerForBuchung(String selectedForPassengerForBuchung) {
+		
+		BuchungHandler bh = new BuchungHandler();
+		List<String> buchungen = bh.getBuchungenbyPassagier(selectedForPassengerForBuchung);
+		this.detailsBuchung = "";
+		for(int i = 0; i< buchungen.size(); i++) {
+			this.detailsBuchung += buchungen.get(i) + "\n";
+			this.test = this.detailsBuchung;
+		}
+		this.selectedForPassengerForBuchung = selectedForPassengerForBuchung;
+	}
 
 	public String getSelectedPassenger() {
 		return selectedPassenger;
@@ -75,6 +98,14 @@ public class BuchungBean {
 			FacesContext.getCurrentInstance().addMessage("buchungForm:assignPassenger", msg);
 		}
 
+	}
+
+	public String getDetailsBuchung() {
+		return this.test;
+	}
+
+	public void setDetailsBuchung(String detailsBuchung) {
+		this.detailsBuchung = detailsBuchung;
 	}
 
 }

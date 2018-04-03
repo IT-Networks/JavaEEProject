@@ -21,11 +21,14 @@ body {
 	
 }
 </style>
-	<b:navBar brand="Brand" brandHref="#" id="navigationBar" position="top"
+	<b:navBar brand="FIS" id="navigationBar" position="top"
 		sticky="false" fixed="top">
 		<b:navbarLinks>
-			<b:navLink value="Home" href="index.xhtml"></b:navLink>
-			<b:navLink value="Aktuelle Flüge" href="currentFluege.xhtml"></b:navLink>
+			<b:dropMenu value="Buchungen" rendered="#{userInfoBean.loggedIn}">
+			<b:navLink value="Zu Flügen" href="currentFluege.xhtml" rendered="#{userInfoBean.loggedIn}"></b:navLink>
+			<b:navLink value="Zu Passagieren" href="currentFluegePassenger.xhtml" rendered="#{userInfoBean.loggedIn}"></b:navLink>
+			</b:dropMenu>
+			
 			<b:navLink value="Login" href="login.xhtml"
 				rendered="#{!userInfoBean.loggedIn}"></b:navLink>
 			<b:dropMenu value="Manager Features"
@@ -35,10 +38,11 @@ body {
 				<b:navLink value="Auslastungen der Flüge" href="auslastung.xhtml"></b:navLink>
 				<b:navLink value="Flugzeug anlegen" href="createFlugzeug.xhtml"></b:navLink>
 			</b:dropMenu>
-			<b:dropMenu value="Flüge">
+			<b:dropMenu value="Flüge" rendered="#{userInfoBean.loggedIn}">
 				<b:navLink value="Buchung anlegen" href="createBuchung.xhtml"></b:navLink>
 				<b:navLink value="Passagiere anlegen" href="createPassagier.xhtml"></b:navLink>
 				<b:navLink value="Mahlzeiten anlegen und zuordnen" href="createMahlzeit.xhtml"></b:navLink>
+				<b:navLink value="Departure Schedules" href="currentFluegeM.xhtml"></b:navLink>
 			</b:dropMenu>
 			<b:navLink value="Registrieren" href="register.xhtml" rendered="#{!userInfoBean.loggedIn}"></b:navLink>
 			<b:navLink value="Ausloggen" href="logout.jsp" rendered="#{userInfoBean.loggedIn}"></b:navLink>

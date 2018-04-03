@@ -10,16 +10,12 @@
 </h:head>
 <h:body>
 	<h:form id="currentFlightsForm" rendered="#{userInfoBean.loggedIn}">
-		<b:container layout="fluid">
-			<b:tabView pills="true"
-				contentStyle="border: 1px solid #ddd;padding:10px">
-				<b:tab title="Aktuelle Flüge">
-
+		<b:container layout="fluid">		
 					<b:panel title="Flüge" look="primary" collapsible="false">
 						<b:dataTable value="#{currentFluegeBean.allFluege}" var="flug"
 							select="true" selectionMode="single"
-							onselect="ajax:currentFluegeBean.onSelect(flug);">
-							<f:ajax process="@this"/>
+							onselect="ajax:currentFluegeBean.onSelect(flug);"
+							update="@form">														
 							<b:dataTableColumn value="#{flug.start}" />
 							<b:dataTableColumn value="#{flug.goal}" />
 							<b:dataTableColumn value="#{flug.name}" />
@@ -40,77 +36,7 @@
 							</b:column>
 						</b:row>
 					</b:panel>
-				</b:tab>
-				<b:tab title="Flug Status" id="firstTab">
-					<b:panel title="Flüge" look="primary" collapsible="false">
-						<b:column medium-screen="2">
-							<h:outputText value="Startzeit (Enter zum bestätigen)" for="startTime" />
-						</b:column>
-						<b:dateTimePicker id="startTime" mode="toggle-icon"
-							showWeek="true" firstDay="1" required="true" ajax="true"
-							update=":currentFlightsForm:dataTable" value="#{currentFluegeBean.time}"
-							label-col-sm="4" col-sm="4" />
-						<b:column medium-screen="6" style-class="message">
-							<b:message for="startTime" col-sm="6" />
-						</b:column>
-						<b:dataTable value="#{currentFluegeBean.allFluegeWithStatus}"
-							var="departureSchedulesModel" select="true"
-							selectionMode="single"
-							onselect="ajax:currentFluegeBean.onSelectDeparture(departureSchedulesModel);"
-							id="dataTable"
-							update="@form">									
-							<b:dataTableColumn value="#{departureSchedulesModel.flugid}" />
-							<b:dataTableColumn value="#{departureSchedulesModel.startort}" />
-							<b:dataTableColumn value="#{departureSchedulesModel.zielort}" />
-							<b:dataTableColumn value="#{departureSchedulesModel.status}" />
-							<b:dataTableColumn value="#{departureSchedulesModel.abflug}" />
-						</b:dataTable>
-						<b:row>
-							<b:column span="2" offset="2">
-								<b:commandButton value="Lade Daten" id="getInfos"
-									ajax="true"
-									update="@form"
-									look="primary" style="width:100%"/>
-							</b:column>
-						</b:row>
-					</b:panel>
-					<b:panel title="Flugdetails" look="primary" collapsible="false" id="nextPanel">
-						<b:row>
-							<b:column medium-screen="2">
-								<h:outputText value="Details" for="details" />
-							</b:column>
-							<b:column medium-screen="4">
-								<b:inputTextarea large-screen="full-width" id="details"
-									value="#{currentFluegeBean.detailsFlug}">
-								</b:inputTextarea>
-							</b:column>
-						</b:row>
-						<b:row>
-							<b:column medium-screen="2">
-								<h:outputText value="Passagiere" for="passenger" 
-								rendered="#{currentFluegeBean.canBook}"/>
-							</b:column>
-							<b:column medium-screen="4">
-								<b:selectOneMenu value="#{currentFluegeBean.selectedPassenger}"
-									id="passenger" rendered="#{currentFluegeBean.canBook}">
-									<f:selectItems value="#{currentFluegeBean.allPassengers}" />
-								</b:selectOneMenu>
-							</b:column>
-						</b:row>
-						<b:row>
-							<b:column span="2" offset="2">
-								<b:commandButton value="Speichern" id="assignPassenger"
-									onclick="ajax:currentFluegeBean.assignPassengerToFlight()" update="@(.message)"
-									look="primary" style="width:100%" 
-									rendered="#{currentFluegeBean.canBook}"/>
-							</b:column>
-							<b:column medium-screen="6" style-class="message">
-								<b:message for="assignPassenger" col-sm="6" />
-							</b:column>
-						</b:row>
-					</b:panel>
-				</b:tab>
-			</b:tabView>
+
 		</b:container>
 	</h:form>
 
