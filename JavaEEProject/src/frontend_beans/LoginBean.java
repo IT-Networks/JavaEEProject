@@ -58,6 +58,7 @@ public class LoginBean {
 			session.setAttribute("profil", "Mitarbeiter");
 			session.setAttribute("role", nh.getNutzertyp(username));
 			FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/currentFluege.xhtml");
 		} else if (result.equals(ErrorHandler.NUTZERNICHTGEFUNDEN)) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", result);
 			FacesContext.getCurrentInstance().addMessage("loginForm:username", msg);
